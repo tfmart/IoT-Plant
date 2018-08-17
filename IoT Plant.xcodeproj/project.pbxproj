@@ -12,6 +12,8 @@
 		7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB47D2124DFFF00886234 /* Main.storyboard */; };
 		7CEEB4812124E00100886234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB4802124E00100886234 /* Assets.xcassets */; };
 		7CEEB4842124E00100886234 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB4822124E00100886234 /* LaunchScreen.storyboard */; };
+		7CEEB48E2125BA5800886234 /* Plants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48D2125BA5800886234 /* Plants.swift */; };
+		7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		7CEEB4802124E00100886234 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CEEB4832124E00100886234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CEEB4852124E00100886234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CEEB48D2125BA5800886234 /* Plants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plants.swift; sourceTree = "<group>"; };
+		7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +59,23 @@
 			isa = PBXGroup;
 			children = (
 				7CEEB4792124DFFF00886234 /* AppDelegate.swift */,
-				7CEEB47B2124DFFF00886234 /* ViewController.swift */,
 				7CEEB47D2124DFFF00886234 /* Main.storyboard */,
+				7CEEB48D2125BA5800886234 /* Plants.swift */,
+				7CEEB4912125C03B00886234 /* Plant List */,
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
 				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
 				7CEEB4852124E00100886234 /* Info.plist */,
 			);
 			path = "IoT Plant";
+			sourceTree = "<group>";
+		};
+		7CEEB4912125C03B00886234 /* Plant List */ = {
+			isa = PBXGroup;
+			children = (
+				7CEEB47B2124DFFF00886234 /* ViewController.swift */,
+				7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */,
+			);
+			path = "Plant List";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */,
+				7CEEB48E2125BA5800886234 /* Plants.swift in Sources */,
 				7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */,
 				7CEEB47A2124DFFF00886234 /* AppDelegate.swift in Sources */,
 			);
@@ -290,7 +306,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.IoT-Plant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,7 +324,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "tfmartins.IoT-Plant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
