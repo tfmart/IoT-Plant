@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class Plant {
     var name: String!
@@ -20,6 +21,7 @@ class Plant {
     }
 }
 
+//Data to fill the CollectionView for demonstration purposes
 class DemoPlantDAO {
     var data: [Plant] = [Plant(name: "Living Room Vase", humidity: "41.2", image: "livingRoom")]
     
