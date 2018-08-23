@@ -19,6 +19,9 @@ class PlantDetailViewController: UIViewController {
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var humidityTitleLabel: UILabel!
+    @IBOutlet weak var lastUpdatedTitleLabel: UILabel!
+    @IBOutlet weak var updateIndicator: UIActivityIndicatorView!
     
     var humidityData: [String]?
     var plantFromCell: Plant?
@@ -28,6 +31,29 @@ class PlantDetailViewController: UIViewController {
     
    //Action Buttons
     @IBAction func updateButtonPressed(_ sender: Any) {
+        lastUpdatedLabel.alpha = 0
+        lastUpdatedTitleLabel.alpha = 0
+        humidityLabel.alpha = 0
+        humidityTitleLabel.alpha = 0
+        updateIndicator.alpha = 1
+        
+        ref = Database.database().reference()
+        
+        //Get data from Firebase
+        databaseHandle = ref?.child("Plants").child("\((plantFromCell?.name)!)").observe(.childAdded, with: { (snapshot) in
+            let post = snapshot.value as? String
+            
+            if let actualPost = post {
+                self.humidityLabel.text = actualPost
+            }
+        })
+        
+        lastUpdatedLabel.alpha = 1
+        lastUpdatedTitleLabel.alpha = 1
+        humidityLabel.alpha = 1
+        humidityTitleLabel.alpha = 1
+        updateIndicator.alpha = 0
+        
     }
     @IBAction func historyButtonPressed(_ sender: Any) {
     }
@@ -58,6 +84,8 @@ class PlantDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateIndicator.alpha = 0
         
         ref = Database.database().reference()
         

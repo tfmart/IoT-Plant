@@ -17,7 +17,7 @@ class AddPlantViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func addPlantButtonPressed(_ sender: Any) {
-        ref?.child("Plants").child(plantNameTextField.text!).childByAutoId().setValue("created plant")
+        ref?.child("Plants").child(plantNameTextField.text!).childByAutoId().setValue("--.-")
         self.dismiss(animated: true, completion: nil)
     }
     

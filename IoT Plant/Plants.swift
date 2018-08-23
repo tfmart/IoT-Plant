@@ -21,7 +21,7 @@ class Plant {
     }
 }
 
-//Data to fill the CollectionView for demonstration purposes
+//Demonstrantion data to fill the CollectionView
 class DemoPlantDAO {
     var data: [Plant] = [Plant(name: "Living Room Vase", humidity: "41.2", image: "livingRoom")]
     

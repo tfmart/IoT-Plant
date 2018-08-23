@@ -22,9 +22,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-    var ref: DatabaseReference?
-    var databaseHandle: DatabaseHandle?
-    
     var plantList = [Plant]()
     
     override func viewDidLoad() {
@@ -37,31 +34,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             emptyListScreen.alpha = 0
         }
         
-        //Set Firebase Reference
-        ref = Database.database().reference()
-
-        ref?.child("Plants").observeSingleEvent(of: .value, with: {(snapshot) in
-            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                self.plantList.append(Plant(name: rest.key, humidity: "41.2", image: "bedroomRoses"))
-                self.listCollectionView.reloadData()
-            }
-            self.loadingPlantsIndicator.alpha = 0.0
-
-        })
-        
-        //Retrieve the posts and listens for changes
-//        databaseHandle = (ref?.child("Plants").observe(.childAdded, with: { (snapshot) in
-//            //convert the value of the data to a string
-//            let post = snapshot.value as? String
-//
-//            if let actualPost = post {
-//                self.plantList.append(Plant(name: actualPost, humidity: "41.2", image: "bedroomRoses"))
-//                print("Hello \(actualPost)")
-//                self.listCollectionView.reloadData()
-//            }
-//        }))!
+        //Function to get the plants and their latest humidity value on Firebase
+        getPlants()
         
         // Do any additional setup after loading the view, typically from a nib.
+        self.listCollectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Reload data when user comes back from another view
+        getPlants()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,7 +57,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.plantName.text = plantList[indexPath.row].name
         cell.plantHumidity.text = plantList[indexPath.row].humidity
         cell.plantImage.image = UIImage(named: plantList[indexPath.row].image)
-        cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
+        //cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
         
         //Style the cell
         cell.layer.cornerRadius = 20.0
@@ -108,6 +90,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //            }
 //        }
 //    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let viewController = storyboard?.instantiateViewController(withIdentifier: "detail") as! PlantDetailViewController
         viewController.modalTransitionStyle = .coverVertical
@@ -116,7 +99,38 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
+    //Get plant data from Firebase DB
+    func getPlants() {
+        let plantRef: DatabaseReference? = Database.database().reference()
+        let humidityRef: DatabaseReference? = Database.database().reference()
+        var checkPlant = 0
+        
+        //Looks for registered plants
+        plantRef?.child("Plants").observeSingleEvent(of: .value, with: {(snapshot) in
+            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                //Looks for latest humidity data found on a plant
+                humidityRef?.child("Plants").child(rest.key).observe(.childAdded, with: {(data) in
+                    //Checks if the plant is already on plantList array
+                    for plants in 0..<self.plantList.count {
+                        if self.plantList[plants].name == rest.key {
+                            //Updates humidity value to the most recent one on the database
+                            self.plantList[plants].humidity = data.value as! String
+                            checkPlant = 1
+                        }
+                    }
+                    //Registers a new plant if it hasn't been registered on the array already
+                    if checkPlant == 0 {
+                        self.plantList.append(Plant(name: rest.key, humidity: data.value as! String, image: "bedroomRoses"))
+                    }
+                    checkPlant = 0
+                    self.listCollectionView.reloadData()
+                })
+                
+            }
+            
+        })
 
+    }
 
 }
 
