@@ -20,13 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMg-4P-L3f">
-                                <rect key="frame" x="0.0" y="17" width="320" height="551"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="Ojc-EO-0d6" kind="embed" id="3tA-fk-OgC"/>
-                                </connections>
-                            </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vn6-zz-xH1">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,7 +99,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="emptyListScreen" destination="VMg-4P-L3f" id="V7D-tQ-mpY"/>
                         <outlet property="listCollectionView" destination="vn6-zz-xH1" id="dKj-cM-sGm"/>
                         <outlet property="loadingPlantsIndicator" destination="xNN-Dm-fia" id="30o-hj-Euf"/>
                     </connections>
@@ -152,7 +144,7 @@
                                 <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="History"/>
                                 <connections>
-                                    <action selector="historyButtonPressed:" destination="51b-dY-FIV" eventType="touchUpInside" id="j6m-Ly-BAZ"/>
+                                    <segue destination="hGe-jG-CxO" kind="show" identifier="history" id="w8F-e9-WFu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-Sn-IKT" userLabel="Add Button">
@@ -348,13 +340,13 @@
         <!--History-->
         <scene sceneID="xbf-He-bzF">
             <objects>
-                <tableViewController id="A8l-fl-k0e" sceneMemberID="viewController">
+                <tableViewController id="A8l-fl-k0e" customClass="HistoryTableViewController" customModule="IoT_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ab3-mi-U0S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wu5-r4-8rV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyTable" id="wu5-r4-8rV" customClass="HistoryTableViewCell" customModule="IoT_Plant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wu5-r4-8rV" id="OnM-5l-TQm">
@@ -370,6 +362,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="humidityLabel" destination="PGX-hc-mbm" id="CdE-kr-zeN"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -383,6 +378,9 @@
                                 <rect key="frame" x="16" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="A8l-fl-k0e" eventType="touchUpInside" id="TvO-1p-sgi"/>
+                                </connections>
                             </button>
                             <color key="tintColor" red="0.32549019610000002" green="0.69803921570000005" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </barButtonItem>
@@ -390,7 +388,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUZ-re-HiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2709" y="-226"/>
+            <point key="canvasLocation" x="2709" y="-137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T1O-Ug-JFd">
@@ -410,33 +408,6 @@
             </objects>
             <point key="canvasLocation" x="80.799999999999997" y="-906.29685157421295"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ibf-Ow-ZZJ">
-            <objects>
-                <viewController id="Ojc-EO-0d6" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jzl-jO-Rps">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No plants registered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSg-TG-txo">
-                                <rect key="frame" x="82.5" y="265" width="155" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="JSg-TG-txo" firstAttribute="centerX" secondItem="jzl-jO-Rps" secondAttribute="centerX" id="Ngf-3Z-0Db"/>
-                            <constraint firstItem="JSg-TG-txo" firstAttribute="centerY" secondItem="jzl-jO-Rps" secondAttribute="centerY" id="SBe-wT-Tfe"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Y8S-1h-cnU"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="esD-K0-SVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1022" y="-217"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3T2-Lz-52E">
             <objects>
@@ -453,7 +424,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVQ-n3-ao3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1849" y="-226"/>
+            <point key="canvasLocation" x="1849" y="-137"/>
         </scene>
     </scenes>
 </document>

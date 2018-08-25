@@ -55,8 +55,6 @@ class PlantDetailViewController: UIViewController {
         updateIndicator.alpha = 0
         
     }
-    @IBAction func historyButtonPressed(_ sender: Any) {
-    }
     
     @IBAction func addButtonPressed(_ sender: Any) {
         //Alert to enable user to input a value
@@ -125,15 +123,16 @@ class PlantDetailViewController: UIViewController {
     }
     
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "history" {
+            plantName = (plantFromCell?.name)!
+        }
     }
-    */
+
 
 }
 

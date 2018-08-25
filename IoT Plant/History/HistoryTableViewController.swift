@@ -7,17 +7,34 @@
 //
 
 import UIKit
+import FirebaseDatabase
+
 
 class HistoryTableViewController: UITableViewController {
 
+    var humidityList: [String] = []
+    var historyReference: DatabaseReference?
+    var humidityHandle: DatabaseHandle?
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        //Get humidity from Firebase
+        historyReference = Database.database().reference()
+        humidityHandle = historyReference?.child("Plants").child(plantName!).observe(.childAdded, with: { (snapshot) in
+            let post = snapshot.value as? String
+            if let actualPost = post {
+                if (actualPost != "--.-") {
+                    self.humidityList.append(actualPost)
+                    self.tableView.reloadData()
+                }
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +46,21 @@ class HistoryTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return humidityList.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "historyTable", for: indexPath) as! HistoryTableViewCell
 
-        // Configure the cell...
+        cell.humidityLabel?.text = humidityList[indexPath.row]
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -91,5 +106,6 @@ class HistoryTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+
+var plantName: String?
