@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>544748481710-og9bu3gfbv77i29r3av1opr7u0dpsabn.apps.googleusercontent.com</string>
+	<string>404136310777-0ipifst5uvteanq5du6lq687gvg3ehe2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.544748481710-og9bu3gfbv77i29r3av1opr7u0dpsabn</string>
+	<string>com.googleusercontent.apps.404136310777-0ipifst5uvteanq5du6lq687gvg3ehe2</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAJ7S7ysQaIJDlUTkBlCTG33LHrbLNJpmc</string>
+	<string>AIzaSyCYoloTRgBRELurLocIOGI3eMQphhYJL5s</string>
 	<key>GCM_SENDER_ID</key>
-	<string>544748481710</string>
+	<string>404136310777</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>tfmartins.IoT-Plant</string>
 	<key>PROJECT_ID</key>
-	<string>iot-plant-52011</string>
+	<string>iot-plant-a035a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>iot-plant-52011.appspot.com</string>
+	<string>iot-plant-a035a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:544748481710:ios:4c5566506155adfb</string>
+	<string>1:404136310777:ios:4c5566506155adfb</string>
 	<key>DATABASE_URL</key>
-	<string>https://iot-plant-52011.firebaseio.com</string>
+	<string>https://iot-plant-a035a.firebaseio.com</string>
 </dict>
 </plist>

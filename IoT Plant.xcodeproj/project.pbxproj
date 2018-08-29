@@ -10,15 +10,15 @@
 		23DE95463CC6621AB996E8CC /* Pods_IoT_Plant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81BEF0C1E8462C42A51EE85 /* Pods_IoT_Plant.framework */; };
 		7C276B37212EFDCA005499AE /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C276B36212EFDCA005499AE /* HistoryTableViewController.swift */; };
 		7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */; };
+		7C69EED3213619D4007DB787 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C69EED2213619D4007DB787 /* GoogleService-Info.plist */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
-		7CCB00922127A7220070CE25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CCB00912127A7220070CE25 /* GoogleService-Info.plist */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
 		7CEEB47A2124DFFF00886234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB4792124DFFF00886234 /* AppDelegate.swift */; };
 		7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB47B2124DFFF00886234 /* ViewController.swift */; };
 		7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB47D2124DFFF00886234 /* Main.storyboard */; };
 		7CEEB4812124E00100886234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB4802124E00100886234 /* Assets.xcassets */; };
 		7CEEB4842124E00100886234 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB4822124E00100886234 /* LaunchScreen.storyboard */; };
-		7CEEB48E2125BA5800886234 /* Plants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48D2125BA5800886234 /* Plants.swift */; };
+		7CEEB48E2125BA5800886234 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48D2125BA5800886234 /* Plant.swift */; };
 		7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +26,8 @@
 		6431B8F3A083CBBFC54ECF29 /* Pods-IoT Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoT Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant.release.xcconfig"; sourceTree = "<group>"; };
 		7C276B36212EFDCA005499AE /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		7C69EED2213619D4007DB787 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
-		7CCB00912127A7220070CE25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		7CEEB4762124DFFF00886234 /* IoT Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IoT Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEEB4792124DFFF00886234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,7 +36,7 @@
 		7CEEB4802124E00100886234 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CEEB4832124E00100886234 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7CEEB4852124E00100886234 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CEEB48D2125BA5800886234 /* Plants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plants.swift; sourceTree = "<group>"; };
+		7CEEB48D2125BA5800886234 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListCollectionViewCell.swift; sourceTree = "<group>"; };
 		D86761B005E9C79A3BF35B67 /* Pods-IoT Plant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoT Plant.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant.debug.xcconfig"; sourceTree = "<group>"; };
 		E81BEF0C1E8462C42A51EE85 /* Pods_IoT_Plant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IoT_Plant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,12 +106,12 @@
 				7C276B3A212EFDDD005499AE /* History */,
 				7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */,
 				7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */,
-				7CEEB48D2125BA5800886234 /* Plants.swift */,
+				7CEEB48D2125BA5800886234 /* Plant.swift */,
 				7CEEB4912125C03B00886234 /* Plant List */,
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
 				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
 				7CEEB4852124E00100886234 /* Info.plist */,
-				7CCB00912127A7220070CE25 /* GoogleService-Info.plist */,
+				7C69EED2213619D4007DB787 /* GoogleService-Info.plist */,
 			);
 			path = "IoT Plant";
 			sourceTree = "<group>";
@@ -186,7 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEEB4842124E00100886234 /* LaunchScreen.storyboard in Resources */,
-				7CCB00922127A7220070CE25 /* GoogleService-Info.plist in Resources */,
+				7C69EED3213619D4007DB787 /* GoogleService-Info.plist in Resources */,
 				7CEEB4812124E00100886234 /* Assets.xcassets in Resources */,
 				7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */,
 			);
@@ -202,12 +202,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -245,7 +247,7 @@
 				7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */,
 				7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */,
 				7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */,
-				7CEEB48E2125BA5800886234 /* Plants.swift in Sources */,
+				7CEEB48E2125BA5800886234 /* Plant.swift in Sources */,
 				7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */,
 				7C276B37212EFDCA005499AE /* HistoryTableViewController.swift in Sources */,
 				7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */,

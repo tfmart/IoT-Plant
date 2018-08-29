@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
 class PlantDetailViewController: UIViewController {
 
@@ -25,6 +26,8 @@ class PlantDetailViewController: UIViewController {
     
     var humidityData: [String]?
     var plantFromCell: Plant?
+    
+    var imageVar: UIImage!
     
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
@@ -98,8 +101,8 @@ class PlantDetailViewController: UIViewController {
 
         
         nameLabel.text = plantFromCell?.name
-        image.image = UIImage(named: (plantFromCell?.image)!)
-        image.image = image.image?.tinted(color: .blue)
+        image.image = plantFromCell?.image
+        image.image = image.image?.tinted(color: .black)
         
         //style the buttons
         updateButton.layer.cornerRadius = 12.0

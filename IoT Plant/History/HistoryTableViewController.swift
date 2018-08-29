@@ -16,6 +16,8 @@ class HistoryTableViewController: UITableViewController {
     var historyReference: DatabaseReference?
     var humidityHandle: DatabaseHandle?
     
+    var pullToRefresh = UIRefreshControl()
+    
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -35,11 +37,34 @@ class HistoryTableViewController: UITableViewController {
                 }
             }
         })
+        
+        //Handles Pull to Refresh
+        pullToRefresh.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(pullToRefresh)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func refresh() {
+        // Empty tableView
+        humidityList.removeAll()
+        self.tableView.reloadData()
+        //Gets data from Firebase
+        historyReference = Database.database().reference()
+        humidityHandle = historyReference?.child("Plants").child(plantName!).observe(.childAdded, with: { (snapshot) in
+            let post = snapshot.value as? String
+            if let actualPost = post {
+                if (actualPost != "--.-") {
+                    self.humidityList.append(actualPost)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        
+        self.pullToRefresh.endRefreshing()
     }
 
     // MARK: - Table view data source
