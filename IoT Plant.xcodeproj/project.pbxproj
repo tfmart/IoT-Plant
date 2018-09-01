@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		23DE95463CC6621AB996E8CC /* Pods_IoT_Plant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81BEF0C1E8462C42A51EE85 /* Pods_IoT_Plant.framework */; };
+		7C2022C121396E6400E89744 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C2022C021396E6400E89744 /* GoogleService-Info.plist */; };
 		7C276B37212EFDCA005499AE /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C276B36212EFDCA005499AE /* HistoryTableViewController.swift */; };
 		7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */; };
-		7C69EED3213619D4007DB787 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C69EED2213619D4007DB787 /* GoogleService-Info.plist */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
 		7CEEB47A2124DFFF00886234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB4792124DFFF00886234 /* AppDelegate.swift */; };
@@ -24,9 +24,9 @@
 
 /* Begin PBXFileReference section */
 		6431B8F3A083CBBFC54ECF29 /* Pods-IoT Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoT Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant.release.xcconfig"; sourceTree = "<group>"; };
+		7C2022C021396E6400E89744 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C276B36212EFDCA005499AE /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
-		7C69EED2213619D4007DB787 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		7CEEB4762124DFFF00886234 /* IoT Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IoT Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +111,7 @@
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
 				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
 				7CEEB4852124E00100886234 /* Info.plist */,
-				7C69EED2213619D4007DB787 /* GoogleService-Info.plist */,
+				7C2022C021396E6400E89744 /* GoogleService-Info.plist */,
 			);
 			path = "IoT Plant";
 			sourceTree = "<group>";
@@ -186,7 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEEB4842124E00100886234 /* LaunchScreen.storyboard in Resources */,
-				7C69EED3213619D4007DB787 /* GoogleService-Info.plist in Resources */,
+				7C2022C121396E6400E89744 /* GoogleService-Info.plist in Resources */,
 				7CEEB4812124E00100886234 /* Assets.xcassets in Resources */,
 				7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */,
 			);

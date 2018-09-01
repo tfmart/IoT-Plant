@@ -18,11 +18,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var plantList = [Plant]()
     var filteredPlants = [Plant]()
     let search = UISearchController(searchResultsController: nil)
+    var lastKey: String = ""
+    var lastHumidity: String = ""
+    var plantsFromDB = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.listCollectionView.reloadData()
         //plantList = DemoPlantDAO.database()
+        
+        if let loadedData = UserDefaults().data(forKey: "plantList") {
+            if let loadedPlant = NSKeyedUnarchiver.unarchiveObject(with: loadedData) as? [Plant] {
+                plantList = loadedPlant
+                //lastKey = plantList[plantList.count-1].name
+                lastKey = plantList[0].name
+                lastHumidity = "..."
+            }
+        } else {
+            print("Nothing has been saved")
+        }
         
         //Function to get the plants and their latest humidity value on Firebase
         getPlants()
@@ -47,8 +61,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewWillAppear(_ animated: Bool) {
         //Reload data when user comes back from another view
-        //getPlantsTest()
-        //self.listCollectionView.reloadData()
+        getPlants()
+        self.listCollectionView.reloadData()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,28 +83,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             plant = plantList[indexPath.row]
         }
-        
-        //Get image from server
-        let store = Storage.storage()
-        let storeRef = store.reference()
-        let plantRef = storeRef.child("images/\(plant.name!)/image.png")
 
-        plantRef.getData(maxSize: 1 * 8000 * 8000) { data, error in
-            if let error = error {
-                print("Error \(error)")
-            } else {
-                cell.plantImage.image = UIImage(data: data!)
-            }
-            
-        }
-        
         //Fill in the labels and image on the cell
         cell.plantName.text = plant.name
         cell.plantHumidity.text = plant.humidity
         cell.plantImage.image = plant.image
-        //cell.plantImage.image = UIImage(named: plant.image)
 
-        //cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
+        //Darken the image
+        cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
 
         //Style the cell
         cell.layer.cornerRadius = 20.0
@@ -141,43 +141,80 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         plantRef?.child("Plants").observeSingleEvent(of: .value, with: {(snapshot) in
             for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                //Look for plant image
-                let plantRef = storeRef.child("images/\(rest.key)/image.png")
-                plantRef.getData(maxSize: 1 * 2048 * 2048) { imageData, error in
-                    var returnedImage: UIImage
-                    if let error = error {
-                        print("Error \(error)")
-                        returnedImage = #imageLiteral(resourceName: "defaultPlant")
-                    } else {
-                        print("Getting image for \(rest.key)")
-                        returnedImage = UIImage(data: imageData!)!
+                
+                if(self.plantsFromDB.contains(rest.key) == false) {
+                    //Fills plantFromDB, that will be later used to compare data from the server to locally stored data
+                    self.plantsFromDB.append(rest.key);
+                }
+                
+                let results = self.plantList.filter { $0.name == rest.key }
+                if(results.isEmpty) {
+                    //Look for plant image
+                    let plantRef = storeRef.child("images/\(rest.key)/image.png")
+                    plantRef.getData(maxSize: 1 * 2048 * 2048) { imageData, error in
+                        var returnedImage: UIImage
+                        if let error = error {
+                            print("Error \(error)")
+                            returnedImage = #imageLiteral(resourceName: "defaultPlant")
+                        } else {
+                            print("Getting image for \(rest.key)")
+                            returnedImage = UIImage(data: imageData!)!
+                        }
+                        
+                        //Looks for latest humidity data found on a plant
+                        humidityRef?.child("Plants").child(rest.key).observe(.childAdded, with: {(data) in
+                            //Checks if the plant is already on plantList array
+                            for plants in 0..<self.plantList.count {
+                                if self.plantList[plants].name == rest.key {
+                                    //Updates humidity value to the most recent one on the database
+                                    self.plantList[plants].humidity = data.value as! String
+                                    checkPlant = 1
+                                }
+                            }
+                            //Registers a new plant if it hasn't been registered on the array already
+                            if checkPlant == 0 {
+                                self.plantList.append(Plant(name: rest.key, humidity: data.value as! String, image: returnedImage))
+                            }
+                            //Save plant list locally
+                            let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
+                            UserDefaults.standard.set(plantsData, forKey: "plantList")
+
+                            checkPlant = 0
+                            self.loadingPlantsIndicator.alpha = 0
+                            self.listCollectionView.reloadData()
+                        })
                     }
+                } else {
+                    //Update humidity values of existing plants
                     
                     //Looks for latest humidity data found on a plant
                     humidityRef?.child("Plants").child(rest.key).observe(.childAdded, with: {(data) in
-                        //Checks if the plant is already on plantList array
-                        for plants in 0..<self.plantList.count {
-                            if self.plantList[plants].name == rest.key {
-                                //Updates humidity value to the most recent one on the database
-                                self.plantList[plants].humidity = data.value as! String
-                                checkPlant = 1
+                        if(self.lastKey != rest.key) {
+                            for plants in 0..<self.plantList.count {
+                                if self.plantList[plants].name == self.lastKey && self.plantList[plants].humidity != self.lastHumidity{
+                                    //Updates humidity value to the most recent one on the database
+                                    self.plantList[plants].humidity = self.lastHumidity
+                                    //Save plant list locally
+                                    let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
+                                    UserDefaults.standard.set(plantsData, forKey: "plantList")
+                                }
+                                //Checks if plantList still stores a plant deleted from server. If it does, the plant is removed locally
+                                if self.plantsFromDB.contains(self.plantList[plants].name!) == false {
+                                    print("Removing \(self.plantList[plants].name!)")
+                                    self.plantList.remove(at: plants)
+                                }
                             }
+                            self.lastKey = rest.key
+                        } else {
+                            self.lastHumidity = data.value as! String
                         }
-                        //Registers a new plant if it hasn't been registered on the array already
-                        if checkPlant == 0 {
-                            self.plantList.append(Plant(name: rest.key, humidity: data.value as! String, image: returnedImage))
-                        }
-                        checkPlant = 0
+
                         self.loadingPlantsIndicator.alpha = 0
                         self.listCollectionView.reloadData()
                     })
-                    
                 }
-                
-                
             }
         })
-        
     }
     
     //MARK: Search Methods
@@ -214,7 +251,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let deletePlantMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             deletePlantMenu.addAction(UIAlertAction(title: "Delete Plant", style: .destructive, handler: { (action) -> Void in
                 let confirmActionAlert = UIAlertController(title: "Delete Plant", message: "Are you sure you want to delete \(self.plantList[indexPath.row].name!)? This action cannot be undone!", preferredStyle: .alert)
-                confirmActionAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak confirmActionAlert] (_) in
+                confirmActionAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
                     //delete plant
                     let deleteRef = Database.database().reference()
                     let ref = deleteRef.child("Plants/\(self.plantList[indexPath.row].name!)")
@@ -237,7 +274,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         }
                     }
                     
+                    
+                    
                     self.plantList.remove(at: indexPath.row)
+                    let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
+                    UserDefaults.standard.set(plantsData, forKey: "plantList")
                     self.listCollectionView.reloadData()
 
                     
@@ -247,7 +288,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }))
             deletePlantMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.present(deletePlantMenu, animated: true, completion: nil)
-            print(indexPath.row)
             
         } else {
             print("Could not find index path")
