@@ -21,6 +21,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var lastKey: String = ""
     var lastHumidity: String = ""
     var plantsFromDB = [String]()
+    var plantListSize = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             print("Nothing has been saved")
         }
+        
+        plantListSize = plantList.count
         
         //Function to get the plants and their latest humidity value on Firebase
         getPlants()
@@ -62,6 +65,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         //Reload data when user comes back from another view
         getPlants()
+        //Saves plantList locally in case data is updated
+        let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
+        UserDefaults.standard.set(plantsData, forKey: "plantList")
+        
         self.listCollectionView.reloadData()
     }
 
@@ -90,7 +97,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.plantImage.image = plant.image
 
         //Darken the image
-        cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
+        //cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
 
         //Style the cell
         cell.layer.cornerRadius = 20.0
@@ -121,10 +128,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if isFiltering() {
             viewController.plantFromCell = filteredPlants[indexPath.row]
             viewController.imageVar = cell.plantImage.image
+            viewController.plantIndex = indexPath.row
         } else {
             viewController.plantFromCell = plantList[indexPath.row]
             viewController.imageVar = cell.plantImage.image
+            viewController.plantIndex = indexPath.row
         }
+        viewController.recievedList = plantList
         self.present(viewController, animated: true, completion: nil)
         
     }
@@ -190,18 +200,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     //Looks for latest humidity data found on a plant
                     humidityRef?.child("Plants").child(rest.key).observe(.childAdded, with: {(data) in
                         if(self.lastKey != rest.key) {
-                            for plants in 0..<self.plantList.count {
-                                if self.plantList[plants].name == self.lastKey && self.plantList[plants].humidity != self.lastHumidity{
-                                    //Updates humidity value to the most recent one on the database
-                                    self.plantList[plants].humidity = self.lastHumidity
-                                    //Save plant list locally
-                                    let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
-                                    UserDefaults.standard.set(plantsData, forKey: "plantList")
-                                }
-                                //Checks if plantList still stores a plant deleted from server. If it does, the plant is removed locally
-                                if self.plantsFromDB.contains(self.plantList[plants].name!) == false {
-                                    print("Removing \(self.plantList[plants].name!)")
-                                    self.plantList.remove(at: plants)
+                            for plants in 0..<self.plantListSize {
+                                if(plants < self.plantListSize) {
+                                    if self.plantList[plants].name == self.lastKey && self.plantList[plants].humidity != self.lastHumidity{
+                                        //Updates humidity value to the most recent one on the database
+                                        self.plantList[plants].humidity = self.lastHumidity
+                                        //Save plant list locally
+                                        let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
+                                        UserDefaults.standard.set(plantsData, forKey: "plantList")
+                                    }
+                                    //Checks if plantList still stores a plant deleted from server. If it does, the plant is removed locally
+                                    if self.plantsFromDB.contains(self.plantList[plants].name!) == false {
+                                        print("Removing \(self.plantList[plants].name!)")
+                                        self.plantList.remove(at: plants)
+                                        self.plantListSize = self.plantList.count
+                                    
+                                    }
                                 }
                             }
                             self.lastKey = rest.key
@@ -273,8 +287,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             print("Image successfully deleted")
                         }
                     }
-                    
-                    
+
                     
                     self.plantList.remove(at: indexPath.row)
                     let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)

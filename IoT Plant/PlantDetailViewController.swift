@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseStorage
 
-class PlantDetailViewController: UIViewController {
+class PlantDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //Outlets
     @IBOutlet weak var image: UIImageView!
@@ -27,10 +27,15 @@ class PlantDetailViewController: UIViewController {
     var humidityData: [String]?
     var plantFromCell: Plant?
     
+    var recievedList = [Plant]()
+    
     var imageVar: UIImage!
+    
+    var plantIndex: Int?
     
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
+    var data: Data?
     
    //Action Buttons
     @IBAction func updateButtonPressed(_ sender: Any) {
@@ -82,6 +87,36 @@ class PlantDetailViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //Button to change image
+    @IBAction func editPhotoButtonPressed(_ sender: Any) {
+        let pickPhotoSource = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        //Camera Button
+        pickPhotoSource.addAction(UIAlertAction(title: "Take a photo", style: .default, handler: { (action) -> Void in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = .camera;
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }))
+        //Photo library button
+        pickPhotoSource.addAction(UIAlertAction(title: "Choose from library", style: .default, handler: { (action) -> Void in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = .photoLibrary;
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }))
+        //Cancel button
+        pickPhotoSource.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+        }))
+        self.present(pickPhotoSource, animated: true, completion: nil)
+        
+        //viewController.plantList[plantIndex!].name = //image loaded from camera or library
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +168,32 @@ class PlantDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "history" {
             plantName = (plantFromCell?.name)!
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+         let viewController = storyboard?.instantiateViewController(withIdentifier: "list") as! ViewController
+        picker.dismiss(animated: true, completion: nil)
+        
+        if let newImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            //Updates image locally
+            image.image = newImage
+            print("Size of plantList = \(viewController.plantList.count)")
+            recievedList[plantIndex!].image = newImage
+            viewController.plantList = recievedList
+            
+            //Updates image on Firebase Storage
+            let plantImageRef: StorageReference? = Storage.storage().reference()
+            if data == nil {
+                data = UIImagePNGRepresentation(newImage)
+            }
+            
+            plantImageRef?.child("images/\((plantFromCell?.name)!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
+                guard metadata != nil else {
+                    print("Error occurred: \(String(describing: error))")
+                    return
+                }
+            }
         }
     }
 
