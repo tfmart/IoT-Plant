@@ -15,13 +15,11 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     //Outlets
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var humidityTitleLabel: UILabel!
-    @IBOutlet weak var lastUpdatedTitleLabel: UILabel!
     @IBOutlet weak var updateIndicator: UIActivityIndicatorView!
     
     var humidityData: [String]?
@@ -39,8 +37,6 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     
    //Action Buttons
     @IBAction func updateButtonPressed(_ sender: Any) {
-        lastUpdatedLabel.alpha = 0
-        lastUpdatedTitleLabel.alpha = 0
         humidityLabel.alpha = 0
         humidityTitleLabel.alpha = 0
         updateIndicator.alpha = 1
@@ -56,8 +52,6 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
             }
         })
         
-        lastUpdatedLabel.alpha = 1
-        lastUpdatedTitleLabel.alpha = 1
         humidityLabel.alpha = 1
         humidityTitleLabel.alpha = 1
         updateIndicator.alpha = 0

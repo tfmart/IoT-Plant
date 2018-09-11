@@ -42,6 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    //Handle 3D Touch shortcut
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "AddPlant" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let addPlantView = storyboard.instantiateViewController(withIdentifier: "addPlant") as! AddPlantViewController
+            
+            if let navC = window?.rootViewController as! UINavigationController? {
+                //Present Modially Add Plant View
+                navC.present(addPlantView, animated: true, completion: nil)
+            }
+        }
+        
+    }
 
 
 }

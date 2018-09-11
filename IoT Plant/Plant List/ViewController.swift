@@ -110,11 +110,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.plantImage.layer.borderColor = UIColor.clear.cgColor
         cell.plantImage.layer.masksToBounds = true
 
-        cell.plantImage.layer.shadowColor = UIColor.gray.cgColor
-        cell.plantImage.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        cell.plantImage.layer.shadowRadius = 10.0
-        cell.plantImage.layer.shadowOpacity = 1.0
-        cell.plantImage.layer.shadowPath = UIBezierPath(roundedRect: cell.plantImage.bounds, cornerRadius: cell.plantImage.layer.cornerRadius).cgPath
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        cell.layer.shadowRadius = 5.0
+        cell.layer.shadowOpacity = 0.7
+        //cell.layer.shadowPath = UIBezierPath(roundedRect: cell.plantImage.bounds, cornerRadius: cell.plantImage.layer.cornerRadius).cgPath
         
         
         return cell
