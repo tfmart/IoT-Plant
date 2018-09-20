@@ -13,6 +13,10 @@
 		7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
+		7CD5E087215038C000B11A3B /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */; };
+		7CD5E08E215040F200B11A3B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E0892150393700B11A3B /* RestKit.framework */; };
+		7CD5E08F215040F200B11A3B /* RestKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E0892150393700B11A3B /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7CD5E091215040F200B11A3B /* VisualRecognitionV3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E08A2150393700B11A3B /* VisualRecognitionV3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7CEEB47A2124DFFF00886234 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB4792124DFFF00886234 /* AppDelegate.swift */; };
 		7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB47B2124DFFF00886234 /* ViewController.swift */; };
 		7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CEEB47D2124DFFF00886234 /* Main.storyboard */; };
@@ -22,6 +26,21 @@
 		7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEEB48F2125C02F00886234 /* PlantListCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7CD5E092215040F200B11A3B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7CD5E08F215040F200B11A3B /* RestKit.framework in Embed Frameworks */,
+				7CD5E091215040F200B11A3B /* VisualRecognitionV3.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		6431B8F3A083CBBFC54ECF29 /* Pods-IoT Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoT Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant.release.xcconfig"; sourceTree = "<group>"; };
 		7C2022C021396E6400E89744 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -29,6 +48,10 @@
 		7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		7CD5E084215038C000B11A3B /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Frameworks/RestKit.framework; sourceTree = "<group>"; };
+		7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Frameworks/VisualRecognitionV3.framework; sourceTree = "<group>"; };
+		7CD5E0892150393700B11A3B /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RestKit.framework; sourceTree = "<group>"; };
+		7CD5E08A2150393700B11A3B /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		7CEEB4762124DFFF00886234 /* IoT Plant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IoT Plant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEEB4792124DFFF00886234 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CEEB47B2124DFFF00886234 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +71,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DE95463CC6621AB996E8CC /* Pods_IoT_Plant.framework in Frameworks */,
+				7CD5E087215038C000B11A3B /* VisualRecognitionV3.framework in Frameworks */,
+				7CD5E08E215040F200B11A3B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				E81BEF0C1E8462C42A51EE85 /* Pods_IoT_Plant.framework */,
+				7CD5E084215038C000B11A3B /* RestKit.framework */,
+				7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -83,6 +110,8 @@
 		7CEEB46D2124DFFF00886234 = {
 			isa = PBXGroup;
 			children = (
+				7CD5E0892150393700B11A3B /* RestKit.framework */,
+				7CD5E08A2150393700B11A3B /* VisualRecognitionV3.framework */,
 				7CEEB4782124DFFF00886234 /* IoT Plant */,
 				7CEEB4772124DFFF00886234 /* Products */,
 				38818FBD3A1196261001EFDD /* Pods */,
@@ -137,6 +166,7 @@
 				7CEEB4732124DFFF00886234 /* Frameworks */,
 				7CEEB4742124DFFF00886234 /* Resources */,
 				AC30380FA43EACD6EF7FB1E1 /* [CP] Embed Pods Frameworks */,
+				7CD5E092215040F200B11A3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -398,6 +428,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZTGHLM6H83;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "IoT Plant/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -417,6 +452,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZTGHLM6H83;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "IoT Plant/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

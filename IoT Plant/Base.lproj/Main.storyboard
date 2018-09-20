@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JKa-cQ-aVa">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JKa-cQ-aVa">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +15,11 @@
             <objects>
                 <viewController storyboardIdentifier="list" id="7DV-lZ-4Og" userLabel="Plant List View" customClass="ViewController" customModule="IoT_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bSh-fE-RJP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vn6-zz-xH1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
@@ -32,12 +30,12 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xNN-Dm-fia">
-                                    <rect key="frame" x="0.0" y="-52" width="375" height="603"/>
+                                    <rect key="frame" x="0.0" y="-47" width="320" height="548"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlantCell" id="F2l-pf-mit" customClass="PlantListCollectionViewCell" customModule="IoT_Plant" customModuleProvider="target">
-                                        <rect key="frame" x="32.5" y="30" width="310" height="310"/>
+                                        <rect key="frame" x="5" y="30" width="310" height="310"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="310"/>
@@ -80,8 +78,8 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IhJ-HM-lFN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="listHeader" id="IhJ-HM-lFN">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -116,17 +114,17 @@
             <objects>
                 <viewController storyboardIdentifier="detail" id="51b-dY-FIV" userLabel="Plant Detail View" customClass="PlantDetailViewController" customModule="IoT_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dmE-ma-rYn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ymA-rp-p3M">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ymA-rp-p3M" secondAttribute="height" multiplier="1:1" id="WRB-hw-N4z"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iY7-YR-zZb" userLabel="Update Button">
-                                <rect key="frame" x="36" y="547" width="303" height="50"/>
+                                <rect key="frame" x="36" y="464.5" width="248" height="41"/>
                                 <color key="backgroundColor" red="0.32549019607843138" green="0.69803921568627447" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iY7-YR-zZb" secondAttribute="height" multiplier="151:25" id="gXu-Id-LDF"/>
@@ -139,7 +137,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hq-Ki-H3d" userLabel="Hisotry Button">
-                                <rect key="frame" x="36" y="602" width="147.5" height="40"/>
+                                <rect key="frame" x="36" y="510.5" width="120" height="32.5"/>
                                 <color key="backgroundColor" red="0.031372549019607843" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9hq-Ki-H3d" secondAttribute="height" multiplier="147:40" id="Hys-qe-YYG"/>
@@ -152,7 +150,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-Sn-IKT" userLabel="Add Button">
-                                <rect key="frame" x="191.5" y="602" width="147.5" height="40"/>
+                                <rect key="frame" x="164" y="510.5" width="120" height="32.5"/>
                                 <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hgc-Sn-IKT" secondAttribute="height" multiplier="147:40" id="rkP-Uu-OyW"/>
@@ -165,19 +163,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4U-ml-YaR">
-                                <rect key="frame" x="36" y="439" width="100" height="29"/>
+                                <rect key="frame" x="36" y="384" width="100" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="41.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czI-59-e7c">
-                                <rect key="frame" x="207.5" y="439" width="48" height="29"/>
+                                <rect key="frame" x="180" y="384" width="48" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="kBx-iP-ND5">
-                                <rect key="frame" x="16" y="323" width="343" height="43"/>
+                                <rect key="frame" x="16" y="268" width="288" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -192,7 +190,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlm-gF-Juq" userLabel="Edit Photo Button">
-                                <rect key="frame" x="329" y="20" width="30" height="30"/>
+                                <rect key="frame" x="274" y="20" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="ffd-ep-4ux"/>
                                     <constraint firstAttribute="height" constant="30" id="vRc-vH-XrY"/>
@@ -205,7 +203,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FvU-aM-hII">
-                                <rect key="frame" x="177.5" y="443" width="20" height="20"/>
+                                <rect key="frame" x="150" y="388.5" width="20" height="20"/>
                                 <color key="color" red="0.32549019610000002" green="0.69803921570000005" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                         </subviews>
@@ -265,17 +263,17 @@
             <objects>
                 <viewController storyboardIdentifier="addPlant" id="f7r-yB-zad" userLabel="Add Plant View Controller" customClass="AddPlantViewController" customModule="IoT_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MXu-cN-T8G">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mhq-vv-EHh">
-                                <rect key="frame" x="97" y="64" width="180" height="180"/>
+                                <rect key="frame" x="97" y="64" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mhq-vv-EHh" secondAttribute="height" multiplier="1:1" id="8vY-pg-N7W"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp9-2h-6Mk">
-                                <rect key="frame" x="36" y="547" width="302" height="50"/>
+                                <rect key="frame" x="36" y="457" width="247" height="41"/>
                                 <color key="backgroundColor" red="0.32549019607843138" green="0.69803921568627447" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Zp9-2h-6Mk" secondAttribute="height" multiplier="151:25" id="O6R-FA-ipc"/>
@@ -289,7 +287,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-WN-YsK">
-                                <rect key="frame" x="16" y="252" width="343" height="41"/>
+                                <rect key="frame" x="16" y="197" width="288" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Change Photo">
                                     <color key="titleColor" red="0.32549019607843138" green="0.69803921568627447" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -299,7 +297,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name your plant" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpK-yc-v3P" userLabel="New Plant Name Text Field">
-                                <rect key="frame" x="12" y="346" width="351" height="30"/>
+                                <rect key="frame" x="12" y="291" width="296" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -314,7 +312,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-rJ-ZGb" userLabel="Name Error Label">
-                                <rect key="frame" x="38" y="384" width="300" height="39.5"/>
+                                <rect key="frame" x="10" y="329" width="300" height="39.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBp-jH-TQT">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="20.5"/>
@@ -333,9 +331,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJo-eh-iHZ" userLabel="Add Photo Button">
-                                <rect key="frame" x="97" y="64" width="180" height="180"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJo-eh-iHZ" userLabel="Add Photo Button">
+                                <rect key="frame" x="97" y="64" width="125" height="125"/>
                                 <state key="normal" title="Button" image="placeholder"/>
                                 <connections>
                                     <action selector="addPhotoButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="fHl-fx-xfm"/>
@@ -349,7 +346,9 @@
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="top" secondItem="4pQ-WN-YsK" secondAttribute="bottom" constant="53" id="7Ev-sB-PEI"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="bottom" constant="8" id="8um-10-Vtc"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="BG0-K6-0SY"/>
+                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" id="S1c-cE-VHw"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="cpK-yc-v3P" secondAttribute="trailing" constant="12" id="TlR-Zv-wzU"/>
+                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="top" id="X3r-0X-o9V"/>
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="12" id="aSh-TG-RyF"/>
                             <constraint firstItem="Zp9-2h-6Mk" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="36" id="jyA-h7-ETn"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="4pQ-WN-YsK" secondAttribute="trailing" constant="16" id="kj3-pT-PU0"/>
@@ -357,8 +356,10 @@
                             <constraint firstItem="ksb-rJ-ZGb" firstAttribute="centerX" secondItem="MXu-cN-T8G" secondAttribute="centerX" id="noF-cp-euj"/>
                             <constraint firstItem="mhq-vv-EHh" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="97" id="o18-9S-LpD"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="bottom" secondItem="Zp9-2h-6Mk" secondAttribute="bottom" constant="70" id="q4o-Sp-tHO"/>
+                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="leading" secondItem="mhq-vv-EHh" secondAttribute="leading" id="tjV-X7-qeg"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="Zp9-2h-6Mk" secondAttribute="trailing" constant="37" id="uVF-OD-QiP"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" constant="98" id="yY3-Sf-tp9"/>
+                            <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="uJo-eh-iHZ" secondAttribute="bottom" constant="8" symbolic="YES" id="zAX-fy-thB"/>
                             <constraint firstItem="8vy-a0-8JY" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="zgm-lu-D92"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="brU-ge-M3h"/>
@@ -381,15 +382,15 @@
             <objects>
                 <tableViewController id="A8l-fl-k0e" customClass="HistoryTableViewController" customModule="IoT_Plant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ab3-mi-U0S">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyTable" id="wu5-r4-8rV" customClass="HistoryTableViewCell" customModule="IoT_Plant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wu5-r4-8rV" id="OnM-5l-TQm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGX-hc-mbm">
@@ -412,7 +413,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History" id="Frf-iN-XzQ">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="GPR-wa-9IE">
+                        <barButtonItem key="leftBarButtonItem" id="GPR-wa-9IE">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WHZ-EP-jyY">
                                 <rect key="frame" x="16" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -437,7 +438,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JKa-cQ-aVa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="v8d-Tr-ZIO">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -455,7 +456,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hGe-jG-CxO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hDP-i0-Mkg">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

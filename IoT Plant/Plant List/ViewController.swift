@@ -177,7 +177,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             for plants in 0..<self.plantList.count {
                                 if self.plantList[plants].name == rest.key {
                                     //Updates humidity value to the most recent one on the database
-                                    self.plantList[plants].humidity = data.value as! String
+                                    self.plantList[plants].humidity = data.value as? String
                                     checkPlant = 1
                                 }
                             }

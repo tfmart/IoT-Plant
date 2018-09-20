@@ -9,11 +9,24 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import VisualRecognitionV3
+import RestKit
+
+struct VisualRecognitionConstrains {
+    static let apiKey = "jK8BkBlwvo4yiqvhIEoYNiRNC7aosPsFxSgrUgalUBJb"
+    static let version = "2018-09-16"
+    static let modelIds = ["PlantsDataset_1727533516"]
+}
 
 class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    let visualRecognition = VisualRecognition(version: VisualRecognitionConstrains.version, apiKey: VisualRecognitionConstrains.apiKey)
+    var modelsToUpdate = [String]()
+    
     var ref: DatabaseReference?
     var data: Data?
+    
+    var suggestedNames = [VisualRecognitionV3.ClassifierResult]()
 
     @IBOutlet weak var plantImage: UIImageView!
     @IBOutlet weak var addPlantButton: UIButton!
@@ -28,8 +41,21 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         addPlantButton.layer.cornerRadius = 12.0
         ref = Database.database().reference()
         self.plantNameTextField.delegate = self
-
-        // Do any additional setup after loading the view.
+        
+        guard let localModels = try? visualRecognition.listLocalModels() else {
+            return
+        }
+        for modelId in VisualRecognitionConstrains.modelIds {
+            // Pull down model if none on device
+            // This only checks if the model is downloaded, we need to change this if we want to check for updates when then open the app
+            if !localModels.contains(modelId) {
+                modelsToUpdate.append(modelId)
+            }
+        }
+        
+        if modelsToUpdate.count > 0 {
+            updateLocalModels(ids: modelsToUpdate)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +172,8 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             data = UIImagePNGRepresentation(image)!
             self.addPhotoButton.alpha = 0
             self.changePhotoButton.alpha = 1
+            //Visual Recognition
+            classifyImage(plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"))
         } else {
             plantImage.image = #imageLiteral(resourceName: "defaultPlant")
             data = UIImagePNGRepresentation(#imageLiteral(resourceName: "defaultPlant"))
@@ -157,6 +185,81 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         
         textField.resignFirstResponder()
         return true
+    }
+    
+    //Downloads Plant Recognizer Model from Watson
+    func updateLocalModels(ids modelIds: [String]) {
+        let dispatchGroup = DispatchGroup()
+        // If the array is empty the dispatch group won't be notified so we might end up with an endless spinner
+        dispatchGroup.enter()
+        for modelId in modelIds {
+            dispatchGroup.enter()
+            let failure = { (error: Error) in
+                dispatchGroup.leave()
+                DispatchQueue.main.async {
+                    self.modelUpdateFail(modelId: modelId, error: error)
+                }
+            }
+            
+            let success = {
+                dispatchGroup.leave()
+            }
+            
+            visualRecognition.updateLocalModel(classifierID: "PlantsDataset_1727533516", failure: failure, success: success)
+        }
+        dispatchGroup.leave()
+    }
+    
+    func modelUpdateFail(modelId: String, error: Error) {
+        let error = error as NSError
+        
+        // 0 = probably wrong api key
+        // 404 = probably no model
+        // -1009 = probably no internet
+        
+        switch error.code {
+        case 0:
+            print("Please check your Visual Recognition API key in `Credentials.plist` and try again.")
+        case 404:
+            print("We couldn't find the model with ID: \"\(modelId)\"")
+        case 500:
+            print("Internal server error. Please try again.")
+        case -1009:
+            print("Please check your internet connection.")
+        default:
+            print("Please try again.")
+        }
+        
+        // TODO: Do some more checks, does the model exist? is it still training? etc.
+        // The service's response is pretty generic and just guesses.
+    }
+    
+    func classifyImage(_ image: UIImage, localThreshold: Double = 0.0) {
+        
+        let failure = { (error: Error) in
+            DispatchQueue.main.async {
+                print(error)
+            }
+        }
+        
+        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: VisualRecognitionConstrains.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
+            
+            // Make sure that an image was successfully classified.
+            guard let classifiedImage = classifiedImages.images.first else {
+                return
+            }
+            
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                // Push the classification results of all the provided models to the ResultsTableView.
+                //print(classifiedImage.classifiers[0].classes[0].className)
+                //print(classifiedImage.classifiers[0].classes[0].score!)
+                if(classifiedImage.classifiers[0].classes[0].score! >= 0.9 ) {
+                    print(classifiedImage.classifiers[0].classes[0].score!)
+                    self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
+                }
+            }
+        }
     }
     
 
