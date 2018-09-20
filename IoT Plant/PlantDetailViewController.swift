@@ -137,9 +137,6 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         updateButton.layer.cornerRadius = 12.0
         historyButton.layer.cornerRadius = 12.0
         addButton.layer.cornerRadius = 12.0
-        
-        //change status bar color to white
-        UIApplication.shared.statusBarStyle = .lightContent
 
         // Do any additional setup after loading the view.
     }
