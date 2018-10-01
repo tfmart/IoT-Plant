@@ -73,7 +73,7 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
             print("Valor adicionado: \(valueRead)")
         }))
         //Pressing Cancel
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -162,11 +162,14 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
          let viewController = storyboard?.instantiateViewController(withIdentifier: "list") as! ViewController
         picker.dismiss(animated: true, completion: nil)
         
-        if let newImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let newImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
             //Updates image locally
             image.image = newImage
             print("Size of plantList = \(viewController.plantList.count)")
@@ -176,7 +179,7 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
             //Updates image on Firebase Storage
             let plantImageRef: StorageReference? = Storage.storage().reference()
             if data == nil {
-                data = UIImagePNGRepresentation(newImage)
+                data = newImage.pngData()
             }
             
             plantImageRef?.child("images/\((plantFromCell?.name)!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
@@ -219,4 +222,14 @@ extension UIImage {
         return newImage
         
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

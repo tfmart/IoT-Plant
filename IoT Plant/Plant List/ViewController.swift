@@ -296,7 +296,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
                     
                 }))
-                confirmActionAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+                confirmActionAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(confirmActionAlert, animated: true, completion: nil)
             }))
             deletePlantMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

@@ -14,7 +14,7 @@ import RestKit
 
 struct VisualRecognitionConstrains {
     static let apiKey = "jK8BkBlwvo4yiqvhIEoYNiRNC7aosPsFxSgrUgalUBJb"
-    static let version = "2018-09-16"
+    static let version = "2018-09-24"
     static let modelIds = ["PlantsDataset_1727533516"]
 }
 
@@ -34,6 +34,8 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var invalidNameLabel: UIStackView!
     @IBOutlet weak var changePhotoButton: UIButton!
     @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var suggestedNameButton: UIButton!
+    @IBOutlet weak var suggestionLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -41,6 +43,8 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         addPlantButton.layer.cornerRadius = 12.0
         ref = Database.database().reference()
         self.plantNameTextField.delegate = self
+        suggestedNameButton.isHidden = true
+        suggestionLabel.isHidden = true
         
         guard let localModels = try? visualRecognition.listLocalModels() else {
             return
@@ -77,7 +81,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             //Upload image to Firebase Storage
             let plantImageRef: StorageReference? = Storage.storage().reference()
             if data == nil {
-                data = UIImagePNGRepresentation(#imageLiteral(resourceName: "defaultPlant"))
+                data = #imageLiteral(resourceName: "defaultPlant").pngData()
             }
             
             plantImageRef?.child("images/\(plantNameTextField.text!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
@@ -134,6 +138,13 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(pickPhotoSource, animated: true, completion: nil)
     }
     
+    @IBAction func suggestionButtonPressed(_ sender: Any) {
+        self.plantNameTextField.text = suggestedNameButton.titleLabel?.text
+        self.suggestionLabel.isHidden = true
+        self.suggestedNameButton.isHidden = true
+    }
+    
+    
     
     @IBAction func changePhotoButtonPressed(_ sender: Any) {
         
@@ -164,19 +175,22 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(pickPhotoSource, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         picker.dismiss(animated: true, completion: nil)
         
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
             plantImage.image = image
-            data = UIImagePNGRepresentation(image)!
+            data = image.pngData()!
             self.addPhotoButton.alpha = 0
             self.changePhotoButton.alpha = 1
             //Visual Recognition
             classifyImage(plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"))
         } else {
             plantImage.image = #imageLiteral(resourceName: "defaultPlant")
-            data = UIImagePNGRepresentation(#imageLiteral(resourceName: "defaultPlant"))
+            data = #imageLiteral(resourceName: "defaultPlant").pngData()
         }
     }
     
@@ -256,7 +270,10 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
                 //print(classifiedImage.classifiers[0].classes[0].score!)
                 if(classifiedImage.classifiers[0].classes[0].score! >= 0.9 ) {
                     print(classifiedImage.classifiers[0].classes[0].score!)
-                    self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
+                    //self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
+                    self.suggestionLabel.isHidden = false
+                    self.suggestedNameButton.isHidden = false
+                    self.suggestedNameButton.titleLabel?.text = classifiedImage.classifiers[0].classes[0].className
                 }
             }
         }
@@ -280,7 +297,7 @@ extension UIView {
         }, completion: nil)
         
         // Swift 4.1 and below
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         
         
         animation.duration = duration // You can set fix duration
@@ -297,4 +314,14 @@ extension UITextField {
             return true
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

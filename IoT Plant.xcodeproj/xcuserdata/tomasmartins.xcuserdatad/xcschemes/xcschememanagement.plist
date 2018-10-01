@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>Plants Widget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>

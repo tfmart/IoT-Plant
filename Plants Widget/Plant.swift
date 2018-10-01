@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseDatabase
+import UIKit
 
 class Plant: NSObject, NSCoding {
     var name: String!

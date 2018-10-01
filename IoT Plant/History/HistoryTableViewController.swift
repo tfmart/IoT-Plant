@@ -39,7 +39,7 @@ class HistoryTableViewController: UITableViewController {
         })
         
         //Handles Pull to Refresh
-        pullToRefresh.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControlEvents.valueChanged)
+        pullToRefresh.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControl.Event.valueChanged)
         self.tableView.addSubview(pullToRefresh)
     }
 

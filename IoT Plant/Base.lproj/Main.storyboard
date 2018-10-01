@@ -30,7 +30,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xNN-Dm-fia">
-                                    <rect key="frame" x="0.0" y="-47" width="320" height="548"/>
+                                    <rect key="frame" x="0.0" y="-47" width="320" height="504"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
@@ -273,10 +273,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp9-2h-6Mk">
-                                <rect key="frame" x="36" y="457" width="247" height="41"/>
+                                <rect key="frame" x="36" y="457" width="248" height="41"/>
                                 <color key="backgroundColor" red="0.32549019607843138" green="0.69803921568627447" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Zp9-2h-6Mk" secondAttribute="height" multiplier="151:25" id="O6R-FA-ipc"/>
+                                    <constraint firstAttribute="width" secondItem="Zp9-2h-6Mk" secondAttribute="height" multiplier="151:25" constant="1" id="O6R-FA-ipc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <state key="normal" title="Add Plant">
@@ -332,12 +332,37 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJo-eh-iHZ" userLabel="Add Photo Button">
-                                <rect key="frame" x="97" y="64" width="125" height="125"/>
+                                <rect key="frame" x="97" y="64" width="126" height="125"/>
                                 <state key="normal" title="Button" image="placeholder"/>
                                 <connections>
                                     <action selector="addPhotoButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="fHl-fx-xfm"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-Xm-tQD" userLabel="Suggested Stack View">
+                                <rect key="frame" x="26" y="246" width="267" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suggestion:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzp-Vv-agW">
+                                        <rect key="frame" x="48" y="8" width="91.333333333333314" height="20.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.043137254899999998" green="0.71372549019999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVp-dj-c5E" userLabel="Suggested Name Button">
+                                        <rect key="frame" x="148" y="2" width="71" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.043137254899999998" green="0.71372549019999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="suggestionButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="iFA-79-yI4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -346,7 +371,7 @@
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="top" secondItem="4pQ-WN-YsK" secondAttribute="bottom" constant="53" id="7Ev-sB-PEI"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="bottom" constant="8" id="8um-10-Vtc"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="BG0-K6-0SY"/>
-                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" id="S1c-cE-VHw"/>
+                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" constant="1" id="S1c-cE-VHw"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="cpK-yc-v3P" secondAttribute="trailing" constant="12" id="TlR-Zv-wzU"/>
                             <constraint firstItem="uJo-eh-iHZ" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="top" id="X3r-0X-o9V"/>
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="12" id="aSh-TG-RyF"/>
@@ -357,7 +382,7 @@
                             <constraint firstItem="mhq-vv-EHh" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="97" id="o18-9S-LpD"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="bottom" secondItem="Zp9-2h-6Mk" secondAttribute="bottom" constant="70" id="q4o-Sp-tHO"/>
                             <constraint firstItem="uJo-eh-iHZ" firstAttribute="leading" secondItem="mhq-vv-EHh" secondAttribute="leading" id="tjV-X7-qeg"/>
-                            <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="Zp9-2h-6Mk" secondAttribute="trailing" constant="37" id="uVF-OD-QiP"/>
+                            <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="Zp9-2h-6Mk" secondAttribute="trailing" constant="36" id="uVF-OD-QiP"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" constant="98" id="yY3-Sf-tp9"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="uJo-eh-iHZ" secondAttribute="bottom" constant="8" symbolic="YES" id="zAX-fy-thB"/>
                             <constraint firstItem="8vy-a0-8JY" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="zgm-lu-D92"/>
@@ -371,11 +396,13 @@
                         <outlet property="invalidNameLabel" destination="ksb-rJ-ZGb" id="8lO-FP-kwl"/>
                         <outlet property="plantImage" destination="mhq-vv-EHh" id="teC-P8-Rhk"/>
                         <outlet property="plantNameTextField" destination="cpK-yc-v3P" id="8fb-CE-cee"/>
+                        <outlet property="suggestedNameButton" destination="yVp-dj-c5E" id="STE-X1-aJb"/>
+                        <outlet property="suggestionLabel" destination="Zzp-Vv-agW" id="XxM-JH-SQl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqT-Vl-aZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2708" y="-907.1964017991005"/>
+            <point key="canvasLocation" x="2707.5" y="-907.3943661971831"/>
         </scene>
         <!--History-->
         <scene sceneID="xbf-He-bzF">
@@ -471,6 +498,6 @@
     </scenes>
     <resources>
         <image name="camera" width="100" height="100"/>
-        <image name="placeholder" width="1000" height="1000"/>
+        <image name="placeholder" width="500" height="500"/>
     </resources>
 </document>
