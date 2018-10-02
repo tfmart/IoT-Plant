@@ -20,6 +20,7 @@ struct VisualRecognitionConstrains {
 
 class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    //MARK: Watson Recognition vars
     let visualRecognition = VisualRecognition(version: VisualRecognitionConstrains.version, apiKey: VisualRecognitionConstrains.apiKey)
     var modelsToUpdate = [String]()
     
@@ -28,6 +29,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     
     var suggestedNames = [VisualRecognitionV3.ClassifierResult]()
 
+    //MARK: IBOutlets
     @IBOutlet weak var plantImage: UIImageView!
     @IBOutlet weak var addPlantButton: UIButton!
     @IBOutlet weak var plantNameTextField: UITextField!
@@ -45,6 +47,11 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         self.plantNameTextField.delegate = self
         suggestedNameButton.isHidden = true
         suggestionLabel.isHidden = true
+        suggestedNameButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        //Style the UIImageView
+        plantImage.layer.cornerRadius = (plantImage.frame.size.width)/2
+        plantImage.layer.masksToBounds = true
         
         guard let localModels = try? visualRecognition.listLocalModels() else {
             return
@@ -273,6 +280,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                     //self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
                     self.suggestionLabel.isHidden = false
                     self.suggestedNameButton.isHidden = false
+                    self.suggestedNameButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
                     self.suggestedNameButton.titleLabel?.text = classifiedImage.classifiers[0].classes[0].className
                 }
             }
