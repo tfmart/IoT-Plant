@@ -30,7 +30,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xNN-Dm-fia">
-                                    <rect key="frame" x="0.0" y="-47" width="320" height="548"/>
+                                    <rect key="frame" x="0.0" y="-47" width="320" height="504"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
@@ -269,10 +269,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mhq-vv-EHh">
-                                <rect key="frame" x="97" y="64" width="125" height="125"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mhq-vv-EHh">
+                                <rect key="frame" x="97" y="64" width="126" height="126"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="mhq-vv-EHh" secondAttribute="height" multiplier="1:1" id="8vY-pg-N7W"/>
+                                    <constraint firstAttribute="width" secondItem="mhq-vv-EHh" secondAttribute="height" multiplier="1:1" id="ZHC-DR-lSE"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp9-2h-6Mk">
@@ -290,7 +290,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-WN-YsK">
-                                <rect key="frame" x="16" y="197" width="288" height="41"/>
+                                <rect key="frame" x="16" y="198" width="288" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Change Photo">
                                     <color key="titleColor" red="0.32549019607843138" green="0.69803921568627447" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -299,8 +299,8 @@
                                     <action selector="changePhotoButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="cZl-Hm-UQ8"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name your plant" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpK-yc-v3P" userLabel="New Plant Name Text Field">
-                                <rect key="frame" x="12" y="291" width="296" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name your plant" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cpK-yc-v3P" userLabel="New Plant Name Text Field">
+                                <rect key="frame" x="12" y="292" width="296" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -315,11 +315,11 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-rJ-ZGb" userLabel="Name Error Label">
-                                <rect key="frame" x="10" y="329" width="300" height="39.5"/>
+                                <rect key="frame" x="10" y="330" width="300" height="39.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBp-jH-TQT">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -335,14 +335,14 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJo-eh-iHZ" userLabel="Add Photo Button">
-                                <rect key="frame" x="97" y="64" width="126" height="125"/>
+                                <rect key="frame" x="97" y="64" width="126" height="126"/>
                                 <state key="normal" title="Button" image="placeholder"/>
                                 <connections>
                                     <action selector="addPhotoButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="fHl-fx-xfm"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfv-Xm-tQD" userLabel="Suggested Stack View">
-                                <rect key="frame" x="12" y="246" width="296" height="35"/>
+                                <rect key="frame" x="12" y="247" width="296" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggestion:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzp-Vv-agW">
                                         <rect key="frame" x="61" y="8" width="91.5" height="20.5"/>
@@ -369,6 +369,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="suggestedButtonTouchDown:" destination="f7r-yB-zad" eventType="touchDown" id="j1B-2c-eQj"/>
                                             <action selector="suggestionButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="iFA-79-yI4"/>
                                         </connections>
                                     </button>
@@ -383,31 +384,48 @@
                                     <constraint firstItem="Zzp-Vv-agW" firstAttribute="leading" relation="lessThanOrEqual" secondItem="dfv-Xm-tQD" secondAttribute="leading" constant="61" id="yru-vm-pzb"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-Jr-mi4">
+                                <rect key="frame" x="12" y="291" width="296" height="30"/>
+                                <color key="backgroundColor" red="0.043137254899999998" green="0.71372549019999998" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="  Name your plant">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ksb-rJ-ZGb" firstAttribute="top" secondItem="cpK-yc-v3P" secondAttribute="bottom" constant="8" symbolic="YES" id="0T0-k2-XJN"/>
-                            <constraint firstItem="mhq-vv-EHh" firstAttribute="top" secondItem="brU-ge-M3h" secondAttribute="top" constant="44" id="4sd-vw-QTC"/>
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="top" secondItem="4pQ-WN-YsK" secondAttribute="bottom" constant="53" id="7Ev-sB-PEI"/>
-                            <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="bottom" constant="8" id="8um-10-Vtc"/>
+                            <constraint firstItem="vgx-Jr-mi4" firstAttribute="top" secondItem="dfv-Xm-tQD" secondAttribute="bottom" constant="9" id="8Fs-ej-pB2"/>
+                            <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="bottom" constant="8" symbolic="YES" id="8ti-nj-Yfw"/>
+                            <constraint firstItem="ksb-rJ-ZGb" firstAttribute="top" secondItem="vgx-Jr-mi4" secondAttribute="bottom" constant="9" id="9x6-3D-eRK"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="BG0-K6-0SY"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="dfv-Xm-tQD" secondAttribute="trailing" constant="12" id="CTu-oM-4PE"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="centerX" secondItem="uJo-eh-iHZ" secondAttribute="centerX" id="CYp-jp-G8F"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="top" secondItem="brU-ge-M3h" secondAttribute="top" constant="44" id="JPD-Tz-eWy"/>
                             <constraint firstItem="dfv-Xm-tQD" firstAttribute="top" secondItem="4pQ-WN-YsK" secondAttribute="bottom" constant="8" symbolic="YES" id="PYS-5d-wFa"/>
-                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" constant="1" id="S1c-cE-VHw"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="top" secondItem="uJo-eh-iHZ" secondAttribute="top" id="QkJ-Nh-lM3"/>
+                            <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="vgx-Jr-mi4" secondAttribute="trailing" constant="12" id="Qy2-pg-lOg"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="cpK-yc-v3P" secondAttribute="trailing" constant="12" id="TlR-Zv-wzU"/>
-                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="top" secondItem="mhq-vv-EHh" secondAttribute="top" id="X3r-0X-o9V"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="97" id="Xgw-I2-FcP"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="leading" secondItem="uJo-eh-iHZ" secondAttribute="leading" id="a8R-v7-ZgR"/>
                             <constraint firstItem="cpK-yc-v3P" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="12" id="aSh-TG-RyF"/>
+                            <constraint firstItem="mhq-vv-EHh" firstAttribute="centerX" secondItem="4pQ-WN-YsK" secondAttribute="centerX" id="apK-wG-JuI"/>
+                            <constraint firstItem="vgx-Jr-mi4" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="12" id="b9Y-ZL-UEh"/>
                             <constraint firstItem="dfv-Xm-tQD" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="12" id="hHz-WF-ikT"/>
                             <constraint firstItem="Zp9-2h-6Mk" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="36" id="jyA-h7-ETn"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="4pQ-WN-YsK" secondAttribute="trailing" constant="16" id="kj3-pT-PU0"/>
                             <constraint firstItem="8vy-a0-8JY" firstAttribute="top" secondItem="brU-ge-M3h" secondAttribute="top" id="n5i-oy-OYf"/>
                             <constraint firstItem="ksb-rJ-ZGb" firstAttribute="centerX" secondItem="MXu-cN-T8G" secondAttribute="centerX" id="noF-cp-euj"/>
-                            <constraint firstItem="mhq-vv-EHh" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="97" id="o18-9S-LpD"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="bottom" secondItem="Zp9-2h-6Mk" secondAttribute="bottom" constant="70" id="q4o-Sp-tHO"/>
                             <constraint firstItem="dfv-Xm-tQD" firstAttribute="centerX" secondItem="MXu-cN-T8G" secondAttribute="centerX" id="qwO-Kf-fe5"/>
-                            <constraint firstItem="uJo-eh-iHZ" firstAttribute="leading" secondItem="mhq-vv-EHh" secondAttribute="leading" id="tjV-X7-qeg"/>
                             <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="Zp9-2h-6Mk" secondAttribute="trailing" constant="36" id="uVF-OD-QiP"/>
-                            <constraint firstItem="brU-ge-M3h" firstAttribute="trailing" secondItem="mhq-vv-EHh" secondAttribute="trailing" constant="98" id="yY3-Sf-tp9"/>
                             <constraint firstItem="4pQ-WN-YsK" firstAttribute="top" secondItem="uJo-eh-iHZ" secondAttribute="bottom" constant="8" symbolic="YES" id="zAX-fy-thB"/>
                             <constraint firstItem="8vy-a0-8JY" firstAttribute="leading" secondItem="brU-ge-M3h" secondAttribute="leading" constant="16" id="zgm-lu-D92"/>
                         </constraints>
@@ -417,6 +435,7 @@
                         <outlet property="addPhotoButton" destination="uJo-eh-iHZ" id="8ES-R2-G0F"/>
                         <outlet property="addPlantButton" destination="Zp9-2h-6Mk" id="2IT-ZL-Tez"/>
                         <outlet property="changePhotoButton" destination="4pQ-WN-YsK" id="C3Y-6R-tRh"/>
+                        <outlet property="fadeSuggestedButton" destination="vgx-Jr-mi4" id="uhW-Ey-gu9"/>
                         <outlet property="invalidNameLabel" destination="ksb-rJ-ZGb" id="8lO-FP-kwl"/>
                         <outlet property="plantImage" destination="mhq-vv-EHh" id="teC-P8-Rhk"/>
                         <outlet property="plantNameTextField" destination="cpK-yc-v3P" id="8fb-CE-cee"/>

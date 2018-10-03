@@ -38,6 +38,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var suggestedNameButton: UIButton!
     @IBOutlet weak var suggestionLabel: UILabel!
+    @IBOutlet weak var fadeSuggestedButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -48,10 +49,12 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         suggestedNameButton.isHidden = true
         suggestionLabel.isHidden = true
         suggestedNameButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        fadeSuggestedButton.isHidden = true
         
         //Style the UIImageView
-        plantImage.layer.cornerRadius = (plantImage.frame.size.width)/2
-        plantImage.layer.masksToBounds = true
+        plantImage.layer.cornerRadius = plantImage.frame.height/2
+        plantImage.layer.masksToBounds = false
+        plantImage.clipsToBounds = true
         
         guard let localModels = try? visualRecognition.listLocalModels() else {
             return
@@ -145,12 +148,23 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(pickPhotoSource, animated: true, completion: nil)
     }
     
-    @IBAction func suggestionButtonPressed(_ sender: Any) {
+    @IBAction func suggestionButtonPressed(_ sender: UIButton) {
+        //makes fadeSuggestionButton appear and animates it
+        self.fadeSuggestedButton.alpha = 1
+        self.fadeSuggestedButton.isHidden = false
+        self.fadeSuggestedButton.fadeOut()
+        self.fadeSuggestedButton.titleLabel!.text = "  \(suggestedNameButton.titleLabel!.text!)"
+        //Puts suggested name on plantNameTextField
         self.plantNameTextField.text = suggestedNameButton.titleLabel?.text
         self.suggestionLabel.isHidden = true
         self.suggestedNameButton.isHidden = true
+        self.invalidNameLabel.alpha = 0
     }
     
+    //Handles when the user is pressing and holding the button
+    @IBAction func suggestedButtonTouchDown(_ sender: UIButton) {
+        sender.setTitle(suggestedNameButton.titleLabel!.text!, for: .normal)
+    }
     
     
     @IBAction func changePhotoButtonPressed(_ sender: Any) {
@@ -275,12 +289,11 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 // Push the classification results of all the provided models to the ResultsTableView.
                 //print(classifiedImage.classifiers[0].classes[0].className)
                 //print(classifiedImage.classifiers[0].classes[0].score!)
-                if(classifiedImage.classifiers[0].classes[0].score! >= 0.9 ) {
+                if(classifiedImage.classifiers[0].classes[0].score! >= 0.85 ) {
                     print(classifiedImage.classifiers[0].classes[0].score!)
                     //self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
                     self.suggestionLabel.isHidden = false
                     self.suggestedNameButton.isHidden = false
-                    self.suggestedNameButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
                     self.suggestedNameButton.titleLabel?.text = classifiedImage.classifiers[0].classes[0].className
                 }
             }
@@ -311,6 +324,12 @@ extension UIView {
         animation.duration = duration // You can set fix duration
         animation.values = values  // You can set fix values here also
         self.layer.add(animation, forKey: "shake")
+    }
+    
+    func fadeOut() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0.0
+        }, completion: nil)
     }
 }
 
