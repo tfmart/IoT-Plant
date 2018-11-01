@@ -12,7 +12,6 @@ import FirebaseStorage
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
-    @IBOutlet weak var loadingPlantsIndicator: UIActivityIndicatorView!
     @IBOutlet weak var listCollectionView: UICollectionView!
     
     var plantList = [Plant]()
@@ -26,8 +25,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.listCollectionView.reloadData()
-        //plantList = DemoPlantDAO.database()
         
+        //Checks if there are any plants saved on disk
         if let loadedData = UserDefaults().data(forKey: "plantList") {
             if let loadedPlant = NSKeyedUnarchiver.unarchiveObject(with: loadedData) as? [Plant] {
                 plantList = loadedPlant
@@ -96,9 +95,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.plantHumidity.text = plant.humidity
         cell.plantImage.image = plant.image
 
-        //Darken the image
-        //cell.plantImage.image = cell.plantImage.image?.tinted(color: .black)
-
         //Style the cell
         cell.layer.cornerRadius = 20.0
         cell.layer.borderWidth = 1.0
@@ -114,7 +110,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.layer.shadowOffset = CGSize(width: 0, height: 5.0)
         cell.layer.shadowRadius = 5.0
         cell.layer.shadowOpacity = 0.7
-        //cell.layer.shadowPath = UIBezierPath(roundedRect: cell.plantImage.bounds, cornerRadius: cell.plantImage.layer.cornerRadius).cgPath
         
         
         return cell
@@ -177,7 +172,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             for plants in 0..<self.plantList.count {
                                 if self.plantList[plants].name == rest.key {
                                     //Updates humidity value to the most recent one on the database
-                                    self.plantList[plants].humidity = data.value as? String
+                                    self.plantList[plants].humidity = (data.value as? String)!
                                     checkPlant = 1
                                 }
                             }
@@ -190,7 +185,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                             UserDefaults.standard.set(plantsData, forKey: "plantList")
 
                             checkPlant = 0
-                            self.loadingPlantsIndicator.alpha = 0
                             self.listCollectionView.reloadData()
                         })
                     }
@@ -210,8 +204,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                                         UserDefaults.standard.set(plantsData, forKey: "plantList")
                                     }
                                     //Checks if plantList still stores a plant deleted from server. If it does, the plant is removed locally
-                                    if self.plantsFromDB.contains(self.plantList[plants].name!) == false {
-                                        print("Removing \(self.plantList[plants].name!)")
+                                    if self.plantsFromDB.contains(self.plantList[plants].name) == false {
+                                        print("Removing \(self.plantList[plants].name)")
                                         self.plantList.remove(at: plants)
                                         self.plantListSize = self.plantList.count
                                     
@@ -222,8 +216,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         } else {
                             self.lastHumidity = data.value as! String
                         }
-
-                        self.loadingPlantsIndicator.alpha = 0
                         self.listCollectionView.reloadData()
                     })
                 }
@@ -253,7 +245,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //Long Press Function
     @objc
     func handleLongPress(longPressGR: UILongPressGestureRecognizer) {
-        if longPressGR.state != .ended {
+        if longPressGR.state != .began {
             return
         }
         
@@ -264,11 +256,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             //var cell = self.listCollectionView.cellForItem(at: indexPath)
             let deletePlantMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             deletePlantMenu.addAction(UIAlertAction(title: "Delete Plant", style: .destructive, handler: { (action) -> Void in
-                let confirmActionAlert = UIAlertController(title: "Delete Plant", message: "Are you sure you want to delete \(self.plantList[indexPath.row].name!)? This action cannot be undone!", preferredStyle: .alert)
+                let confirmActionAlert = UIAlertController(title: "Delete Plant", message: "Are you sure you want to delete \(self.plantList[indexPath.row].name)? This action cannot be undone!", preferredStyle: .alert)
                 confirmActionAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-                    //delete plant
+                    //Deletes plant from Firebase
                     let deleteRef = Database.database().reference()
-                    let ref = deleteRef.child("Plants/\(self.plantList[indexPath.row].name!)")
+                    let ref = deleteRef.child("Plants/\(self.plantList[indexPath.row].name)")
                     
                     ref.removeValue { error, _ in
                         if let error = error {
@@ -277,7 +269,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     }
                     
                     let storage = Storage.storage().reference()
-                    let storageRef = storage.child("images/\(self.plantList[indexPath.row].name!)/image.png")
+                    let storageRef = storage.child("images/\(self.plantList[indexPath.row].name)/image.png")
                     
                     //Removes image from storage
                     storageRef.delete { error in
@@ -288,7 +280,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         }
                     }
 
-                    
+                    //Removes plant from Core Data
                     self.plantList.remove(at: indexPath.row)
                     let plantsData = NSKeyedArchiver.archivedData(withRootObject: self.plantList)
                     UserDefaults.standard.set(plantsData, forKey: "plantList")
@@ -305,6 +297,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             print("Could not find index path")
         }
+    }
+    
+    @IBAction func unwindToList(segue: UIStoryboardSegue) {
+        
     }
 
 }

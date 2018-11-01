@@ -72,6 +72,9 @@
 /* Begin PBXFileReference section */
 		6431B8F3A083CBBFC54ECF29 /* Pods-IoT Plant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IoT Plant.release.xcconfig"; path = "Pods/Target Support Files/Pods-IoT Plant/Pods-IoT Plant.release.xcconfig"; sourceTree = "<group>"; };
 		7C2022C021396E6400E89744 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C2747682167B16600C5DC1A /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C27476A2167B16600C5DC1A /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C27476C2167B16600C5DC1A /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C276B36212EFDCA005499AE /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		7C276B38212EFDD8005499AE /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		7C8111822159A31000DF19FB /* Plants Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Plants Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,8 +87,13 @@
 		7C8111982159ADE700DF19FB /* Plants Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Plants Widget.entitlements"; sourceTree = "<group>"; };
 		7C8111992159ADF800DF19FB /* IoT Plant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "IoT Plant.entitlements"; sourceTree = "<group>"; };
 		7C81119A2159B13F00DF19FB /* defaultPlant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultPlant.png; path = "IoT Plant/Assets.xcassets/defaultPlant.imageset/defaultPlant.png"; sourceTree = SOURCE_ROOT; };
+		7CC6ADFC216936E300588325 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC6ADFE216936E700588325 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		7CD2C7492167A83D006A1692 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CD2C74B2167A83D006A1692 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CD2C74D2167A83D006A1692 /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD5E084215038C000B11A3B /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Frameworks/RestKit.framework; sourceTree = "<group>"; };
 		7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VisualRecognitionV3.framework; path = Frameworks/VisualRecognitionV3.framework; sourceTree = "<group>"; };
 		7CD5E0892150393700B11A3B /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RestKit.framework; sourceTree = "<group>"; };
@@ -128,7 +136,15 @@
 		0BE84DDEB7DA6A50CF64C698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7CC6ADFE216936E700588325 /* FirebaseDatabase.framework */,
+				7CC6ADFC216936E300588325 /* FirebaseCore.framework */,
+				7C2747682167B16600C5DC1A /* FirebaseCore.framework */,
+				7C27476A2167B16600C5DC1A /* FirebaseDatabase.framework */,
+				7C27476C2167B16600C5DC1A /* FirebaseStorage.framework */,
 				E81BEF0C1E8462C42A51EE85 /* Pods_IoT_Plant.framework */,
+				7CD2C7492167A83D006A1692 /* FirebaseCore.framework */,
+				7CD2C74B2167A83D006A1692 /* FirebaseDatabase.framework */,
+				7CD2C74D2167A83D006A1692 /* FirebaseStorage.framework */,
 				7CD5E084215038C000B11A3B /* RestKit.framework */,
 				7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */,
 				7C8111832159A31000DF19FB /* NotificationCenter.framework */,

@@ -80,26 +80,22 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func addPlantButtonPressed(_ sender: Any) {
         if(plantNameTextField.validateTextFirebase()) {
+           //Adiciona um valor para humidade
             ref?.child("Plants").child(plantNameTextField.text!).childByAutoId().setValue("--.-")
             
             //Upload image to Firebase Storage
             let plantImageRef: StorageReference? = Storage.storage().reference()
             if data == nil {
+                //Uses a placeholder if the user doesn't add a image
                 data = #imageLiteral(resourceName: "defaultPlant").pngData()
             }
-            
             plantImageRef?.child("images/\(plantNameTextField.text!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
                 guard metadata != nil else {
                     print("Error occurred: \(String(describing: error))")
                     return
                 }
-                //print("download url for profile is \(metadata.downloadURL)")
             }
             
             //Append created plant to list of plants at ViewController
@@ -110,10 +106,9 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
                     presenter.plantList.append(Plant(name: plantNameTextField.text!, humidity: "--.-", image: plantImage.image!))
                 }
             }
-            
-            
             self.dismiss(animated: true, completion: nil)
         } else {
+            //if plant name is invalid
             invalidNameLabel.alpha = 1
             addPlantButton.errorShake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
         }
@@ -197,8 +192,8 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         picker.dismiss(animated: true, completion: nil)
         

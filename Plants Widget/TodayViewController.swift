@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, UICollectionView
             }
         } else {
             print("Nothing has been saved")
-            plantList = [Plant(name: "Bedroom Roses", humidity: "70.9", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Cactus", humidity: "40.1", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Moon Orchid", humidity: "25.2", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Majesty Palm", humidity: "33.1", image: #imageLiteral(resourceName: "defaultPlant.png"))]
+            plantList = [Plant(name: "Bedroom Roses", humidity: "70.9", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Cactus", humidity: "40.1", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Moon Orchid", humidity: "25.2", image: #imageLiteral(resourceName: "defaultPlant.png"))]
         }
         self.todayCollectionView.reloadData()
     }

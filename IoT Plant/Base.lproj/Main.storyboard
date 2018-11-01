@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JKa-cQ-aVa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JKa-cQ-aVa">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,10 +29,6 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
-                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xNN-Dm-fia">
-                                    <rect key="frame" x="0.0" y="-47" width="320" height="504"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlantCell" id="F2l-pf-mit" customClass="PlantListCollectionViewCell" customModule="IoT_Plant" customModuleProvider="target">
                                         <rect key="frame" x="5" y="30" width="310" height="310"/>
@@ -102,7 +98,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="listCollectionView" destination="vn6-zz-xH1" id="dKj-cM-sGm"/>
-                        <outlet property="loadingPlantsIndicator" destination="xNN-Dm-fia" id="30o-hj-Euf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1vR-Oh-jzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -311,7 +306,7 @@
                                     <color key="titleColor" red="0.32549019610000002" green="0.69803921570000005" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelButtonPressed:" destination="f7r-yB-zad" eventType="touchUpInside" id="iYN-6h-yYM"/>
+                                    <segue destination="Syi-3Q-N1N" kind="unwind" unwindAction="unwindToListWithSegue:" id="JBk-qQ-Mcz"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-rJ-ZGb" userLabel="Name Error Label">
@@ -444,6 +439,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqT-Vl-aZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Syi-3Q-N1N" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2707.5" y="-907.3943661971831"/>
         </scene>
