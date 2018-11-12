@@ -16,6 +16,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var plantList = [Plant]()
     var filteredPlants = [Plant]()
+    var plantData = PlantModel()
     let search = UISearchController(searchResultsController: nil)
     var lastKey: String = ""
     var lastHumidity: String = ""
@@ -26,17 +27,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         self.listCollectionView.reloadData()
         
-        //Checks if there are any plants saved on disk
-        if let loadedData = UserDefaults().data(forKey: "plantList") {
-            if let loadedPlant = NSKeyedUnarchiver.unarchiveObject(with: loadedData) as? [Plant] {
-                plantList = loadedPlant
-                //lastKey = plantList[plantList.count-1].name
-                lastKey = plantList[0].name
-                lastHumidity = "..."
-            }
-        } else {
-            print("Nothing has been saved")
-        }
+        plantList = plantData.loadLocalData()
         
         plantListSize = plantList.count
         
@@ -152,6 +143,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.plantsFromDB.append(rest.key);
                 }
                 
+                //Chekcks if plant exists locally
                 let results = self.plantList.filter { $0.name == rest.key }
                 if(results.isEmpty) {
                     //Look for plant image
@@ -311,4 +303,3 @@ extension ViewController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
-

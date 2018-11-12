@@ -20,6 +20,7 @@
 		7C81119B2159B13F00DF19FB /* defaultPlant.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C81119A2159B13F00DF19FB /* defaultPlant.png */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
+		7CCB6D082199DDA60051458B /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB6D072199DDA60051458B /* PlantModel.swift */; };
 		7CD5E087215038C000B11A3B /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */; };
 		7CD5E08E215040F200B11A3B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E0892150393700B11A3B /* RestKit.framework */; };
 		7CD5E08F215040F200B11A3B /* RestKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E0892150393700B11A3B /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -91,6 +92,7 @@
 		7CC6ADFE216936E700588325 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		7CCB6D072199DDA60051458B /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
 		7CD2C7492167A83D006A1692 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD2C74B2167A83D006A1692 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD2C74D2167A83D006A1692 /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +218,7 @@
 				7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */,
 				7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */,
 				7CEEB48D2125BA5800886234 /* Plant.swift */,
+				7CCB6D072199DDA60051458B /* PlantModel.swift */,
 				7CEEB4912125C03B00886234 /* Plant List */,
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
 				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
@@ -411,6 +414,7 @@
 				7CEEB4902125C02F00886234 /* PlantListCollectionViewCell.swift in Sources */,
 				7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */,
 				7CEEB48E2125BA5800886234 /* Plant.swift in Sources */,
+				7CCB6D082199DDA60051458B /* PlantModel.swift in Sources */,
 				7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */,
 				7C276B37212EFDCA005499AE /* HistoryTableViewController.swift in Sources */,
 				7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */,

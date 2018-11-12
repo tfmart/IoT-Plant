@@ -12,16 +12,16 @@ import FirebaseStorage
 import VisualRecognitionV3
 import RestKit
 
-struct VisualRecognitionConstrains {
+struct VisualRecognitionConstants {
     static let apiKey = "jK8BkBlwvo4yiqvhIEoYNiRNC7aosPsFxSgrUgalUBJb"
-    static let version = "2018-09-24"
+    static let version = "2018-11-12"
     static let modelIds = ["PlantsDataset_1727533516"]
 }
 
 class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     //MARK: Watson Recognition vars
-    let visualRecognition = VisualRecognition(version: VisualRecognitionConstrains.version, apiKey: VisualRecognitionConstrains.apiKey)
+    let visualRecognition = VisualRecognition(version: VisualRecognitionConstants.version, apiKey: VisualRecognitionConstants.apiKey)
     var modelsToUpdate = [String]()
     
     var ref: DatabaseReference?
@@ -59,7 +59,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         guard let localModels = try? visualRecognition.listLocalModels() else {
             return
         }
-        for modelId in VisualRecognitionConstrains.modelIds {
+        for modelId in VisualRecognitionConstants.modelIds {
             // Pull down model if none on device
             // This only checks if the model is downloaded, we need to change this if we want to check for updates when then open the app
             if !localModels.contains(modelId) {
@@ -272,7 +272,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
         
-        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: VisualRecognitionConstrains.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
+        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: VisualRecognitionConstants.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
             
             // Make sure that an image was successfully classified.
             guard let classifiedImage = classifiedImages.images.first else {
