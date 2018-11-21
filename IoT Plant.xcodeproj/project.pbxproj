@@ -18,6 +18,8 @@
 		7C8111942159A83700DF19FB /* TodayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8111932159A83700DF19FB /* TodayCollectionViewCell.swift */; };
 		7C8111972159AA2300DF19FB /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8111952159AA1900DF19FB /* Plant.swift */; };
 		7C81119B2159B13F00DF19FB /* defaultPlant.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C81119A2159B13F00DF19FB /* defaultPlant.png */; };
+		7CC804AF21A58E970082B797 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC804AE21A58E970082B797 /* Extensions.swift */; };
+		7CC804B221A592CD0082B797 /* WatsonRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC804B121A592CD0082B797 /* WatsonRecognition.swift */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
 		7CCB6D082199DDA60051458B /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB6D072199DDA60051458B /* PlantModel.swift */; };
@@ -90,6 +92,8 @@
 		7C81119A2159B13F00DF19FB /* defaultPlant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultPlant.png; path = "IoT Plant/Assets.xcassets/defaultPlant.imageset/defaultPlant.png"; sourceTree = SOURCE_ROOT; };
 		7CC6ADFC216936E300588325 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CC6ADFE216936E700588325 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC804AE21A58E970082B797 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7CC804B121A592CD0082B797 /* WatsonRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonRecognition.swift; sourceTree = "<group>"; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		7CCB6D072199DDA60051458B /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
@@ -186,6 +190,15 @@
 			path = "Plants Widget";
 			sourceTree = "<group>";
 		};
+		7CC804B021A58F1E0082B797 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CC804B121A592CD0082B797 /* WatsonRecognition.swift */,
+				7CC804AE21A58E970082B797 /* Extensions.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
 		7CEEB46D2124DFFF00886234 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +229,7 @@
 				7CEEB47D2124DFFF00886234 /* Main.storyboard */,
 				7C276B3A212EFDDD005499AE /* History */,
 				7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */,
+				7CC804B021A58F1E0082B797 /* Support Files */,
 				7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */,
 				7CEEB48D2125BA5800886234 /* Plant.swift */,
 				7CCB6D072199DDA60051458B /* PlantModel.swift */,
@@ -415,6 +429,8 @@
 				7C276B39212EFDD8005499AE /* HistoryTableViewCell.swift in Sources */,
 				7CEEB48E2125BA5800886234 /* Plant.swift in Sources */,
 				7CCB6D082199DDA60051458B /* PlantModel.swift in Sources */,
+				7CC804AF21A58E970082B797 /* Extensions.swift in Sources */,
+				7CC804B221A592CD0082B797 /* WatsonRecognition.swift in Sources */,
 				7CEEB47C2124DFFF00886234 /* ViewController.swift in Sources */,
 				7C276B37212EFDCA005499AE /* HistoryTableViewController.swift in Sources */,
 				7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */,

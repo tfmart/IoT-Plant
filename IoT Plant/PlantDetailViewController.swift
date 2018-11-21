@@ -22,7 +22,9 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var humidityTitleLabel: UILabel!
     @IBOutlet weak var updateIndicator: UIActivityIndicatorView!
     
+    //data to fill history tableView
     var humidityData: [String]?
+    //plant selected on ViewController
     var plantFromCell: Plant?
     
     var recievedList = [Plant]()
@@ -30,7 +32,7 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     var imageVar: UIImage!
     
     var plantIndex: Int?
-    
+    //Firebase vars
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
     var data: Data?
@@ -163,8 +165,8 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
          let viewController = storyboard?.instantiateViewController(withIdentifier: "list") as! ViewController
         picker.dismiss(animated: true, completion: nil)
@@ -192,36 +194,6 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
 
 
-}
-
-extension UIImage {
-    //Extension to darken image
-    func tinted(color: UIColor) -> UIImage {
-        
-        UIGraphicsBeginImageContext(self.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return self }
-        guard let cgImage = cgImage else { return self }
-        
-        // flip the image
-        context.scaleBy(x: 1.0, y: -1.0)
-        context.translateBy(x: 0.0, y: -size.height)
-        
-        // multiply blend mode
-        context.setBlendMode(.multiply)
-        
-        // darken image
-        let rect = CGRect(origin: .zero, size: size)
-        context.draw(cgImage, in: rect)
-        UIColor(white: 0, alpha: 0.15).setFill()
-        context.fill(rect)
-        
-        // create uiimage
-        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return self }
-        UIGraphicsEndImageContext()
-        
-        return newImage
-        
-    }
 }
 
 // Helper function inserted by Swift 4.2 migrator.

@@ -7,27 +7,14 @@
 //
 
 import UIKit
-import FirebaseDatabase
-import FirebaseStorage
 import VisualRecognitionV3
 import RestKit
 
-struct VisualRecognitionConstants {
-    static let apiKey = "jK8BkBlwvo4yiqvhIEoYNiRNC7aosPsFxSgrUgalUBJb"
-    static let version = "2018-11-12"
-    static let modelIds = ["PlantsDataset_1727533516"]
-}
-
 class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
-    //MARK: Watson Recognition vars
-    let visualRecognition = VisualRecognition(version: VisualRecognitionConstants.version, apiKey: VisualRecognitionConstants.apiKey)
-    var modelsToUpdate = [String]()
-    
-    var ref: DatabaseReference?
+
+    let watsonRecognition = WatsonRecognition()
     var data: Data?
-    
-    var suggestedNames = [VisualRecognitionV3.ClassifierResult]()
+    let plantModel = PlantModel()
 
     //MARK: IBOutlets
     @IBOutlet weak var plantImage: UIImageView!
@@ -44,7 +31,6 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         addPlantButton.layer.cornerRadius = 12.0
-        ref = Database.database().reference()
         self.plantNameTextField.delegate = self
         suggestedNameButton.isHidden = true
         suggestionLabel.isHidden = true
@@ -55,21 +41,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         plantImage.layer.cornerRadius = plantImage.frame.height/2
         plantImage.layer.masksToBounds = false
         plantImage.clipsToBounds = true
-        
-        guard let localModels = try? visualRecognition.listLocalModels() else {
-            return
-        }
-        for modelId in VisualRecognitionConstants.modelIds {
-            // Pull down model if none on device
-            // This only checks if the model is downloaded, we need to change this if we want to check for updates when then open the app
-            if !localModels.contains(modelId) {
-                modelsToUpdate.append(modelId)
-            }
-        }
-        
-        if modelsToUpdate.count > 0 {
-            updateLocalModels(ids: modelsToUpdate)
-        }
+        watsonRecognition.lookForUpdates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,31 +53,8 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func addPlantButtonPressed(_ sender: Any) {
-        if(plantNameTextField.validateTextFirebase()) {
-           //Adiciona um valor para humidade
-            ref?.child("Plants").child(plantNameTextField.text!).childByAutoId().setValue("--.-")
-            
-            //Upload image to Firebase Storage
-            let plantImageRef: StorageReference? = Storage.storage().reference()
-            if data == nil {
-                //Uses a placeholder if the user doesn't add a image
-                data = #imageLiteral(resourceName: "defaultPlant").pngData()
-            }
-            plantImageRef?.child("images/\(plantNameTextField.text!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
-                guard metadata != nil else {
-                    print("Error occurred: \(String(describing: error))")
-                    return
-                }
-            }
-            
-            //Append created plant to list of plants at ViewController
-            if let presenter = (presentingViewController as? UINavigationController)?.viewControllers.last as? ViewController {
-                if(plantImage.image == nil) {
-                    presenter.plantList.append(Plant(name: plantNameTextField.text!, humidity: "--.-", image: #imageLiteral(resourceName: "defaultPlant")))
-                } else {
-                    presenter.plantList.append(Plant(name: plantNameTextField.text!, humidity: "--.-", image: plantImage.image!))
-                }
-            }
+        if(plantNameTextField.validateDatabaseName()) {
+            plantModel.addPlant(name: plantNameTextField.text!, image: data!)
             self.dismiss(animated: true, completion: nil)
         } else {
             //if plant name is invalid
@@ -210,58 +159,10 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
-    
+    //Dismiss keyboard when return is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-    }
-    
-    //Downloads Plant Recognizer Model from Watson
-    func updateLocalModels(ids modelIds: [String]) {
-        let dispatchGroup = DispatchGroup()
-        // If the array is empty the dispatch group won't be notified so we might end up with an endless spinner
-        dispatchGroup.enter()
-        for modelId in modelIds {
-            dispatchGroup.enter()
-            let failure = { (error: Error) in
-                dispatchGroup.leave()
-                DispatchQueue.main.async {
-                    self.modelUpdateFail(modelId: modelId, error: error)
-                }
-            }
-            
-            let success = {
-                dispatchGroup.leave()
-            }
-            
-            visualRecognition.updateLocalModel(classifierID: "PlantsDataset_1727533516", failure: failure, success: success)
-        }
-        dispatchGroup.leave()
-    }
-    
-    func modelUpdateFail(modelId: String, error: Error) {
-        let error = error as NSError
-        
-        // 0 = probably wrong api key
-        // 404 = probably no model
-        // -1009 = probably no internet
-        
-        switch error.code {
-        case 0:
-            print("Please check your Visual Recognition API key in `Credentials.plist` and try again.")
-        case 404:
-            print("We couldn't find the model with ID: \"\(modelId)\"")
-        case 500:
-            print("Internal server error. Please try again.")
-        case -1009:
-            print("Please check your internet connection.")
-        default:
-            print("Please try again.")
-        }
-        
-        // TODO: Do some more checks, does the model exist? is it still training? etc.
-        // The service's response is pretty generic and just guesses.
     }
     
     func classifyImage(_ image: UIImage, localThreshold: Double = 0.0) {
@@ -272,68 +173,20 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
         
-        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: VisualRecognitionConstants.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
+        watsonRecognition.visualRecognition.classifyWithLocalModel(image: image, classifierIDs: WatsonRecognitionConstants.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
             
             // Make sure that an image was successfully classified.
             guard let classifiedImage = classifiedImages.images.first else {
                 return
             }
             
-            // Update UI on main thread
             DispatchQueue.main.async {
-                // Push the classification results of all the provided models to the ResultsTableView.
-                //print(classifiedImage.classifiers[0].classes[0].className)
-                //print(classifiedImage.classifiers[0].classes[0].score!)
                 if(classifiedImage.classifiers[0].classes[0].score! >= 0.85 ) {
-                    print(classifiedImage.classifiers[0].classes[0].score!)
-                    //self.plantNameTextField.text = classifiedImage.classifiers[0].classes[0].className
                     self.suggestionLabel.isHidden = false
                     self.suggestedNameButton.isHidden = false
                     self.suggestedNameButton.titleLabel?.text = classifiedImage.classifiers[0].classes[0].className
                 }
             }
-        }
-    }
-    
-
-}
-
-extension UIView {
-    // Using CAMediaTimingFunction
-    func errorShake(duration: TimeInterval = 0.5, values: [CGFloat]) {
-        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        let originalColor = self.backgroundColor
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.backgroundColor = UIColor.red
-        }, completion: nil)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.backgroundColor = originalColor
-        }, completion: nil)
-        
-        // Swift 4.1 and below
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-        
-        
-        animation.duration = duration // You can set fix duration
-        animation.values = values  // You can set fix values here also
-        self.layer.add(animation, forKey: "shake")
-    }
-    
-    func fadeOut() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.alpha = 0.0
-        }, completion: nil)
-    }
-}
-
-extension UITextField {
-    func validateTextFirebase() -> Bool {
-        if (self.text?.isEmpty)! || (self.text?.contains("."))! || (self.text?.contains("#"))! || (self.text?.contains("$"))! || (self.text?.contains("["))! || (self.text?.contains("]"))! {
-            return false
-        } else {
-            return true
         }
     }
 }
