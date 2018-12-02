@@ -80,7 +80,28 @@ class WatsonRecognition {
         }
     }
     
-    
+    func classifyPlant(image: UIImage, callback: @escaping ((_ suggestedName: String) -> Void)) {
+        let watsonRecognition = WatsonRecognition()
+        let failure = { (error: Error) in
+            DispatchQueue.main.async {
+                print(error)
+            }
+        }
+        
+        watsonRecognition.visualRecognition.classifyWithLocalModel(image: image, classifierIDs: WatsonRecognitionConstants.modelIds, threshold: 0.0, failure: failure) { classifiedImages in
+            
+            // Make sure that an image was successfully classified.
+            guard let classifiedImage = classifiedImages.images.first else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if(classifiedImage.classifiers[0].classes[0].score! >= 0.85 ) {
+                    callback(classifiedImage.classifiers[0].classes[0].className)
+                }
+            }
+        }
+    }
 
 }
 

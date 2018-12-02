@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import VisualRecognitionV3
-import RestKit
 
 class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
@@ -54,6 +52,9 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func addPlantButtonPressed(_ sender: Any) {
         if(plantNameTextField.validateDatabaseName()) {
+            if data == nil {
+                data = #imageLiteral(resourceName: "defaultPlant").pngData()
+            }
             plantModel.addPlant(name: plantNameTextField.text!, image: data!)
             self.dismiss(animated: true, completion: nil)
         } else {
@@ -112,7 +113,6 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     @IBAction func changePhotoButtonPressed(_ sender: Any) {
-        
         let pickPhotoSource = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         //Camera Button
         pickPhotoSource.addAction(UIAlertAction(title: "Take a photo", style: .default, handler: { (action) -> Void in
@@ -152,7 +152,12 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             self.addPhotoButton.alpha = 0
             self.changePhotoButton.alpha = 1
             //Visual Recognition
-            classifyImage(plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"))
+            //classifyImage(plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"))
+            watsonRecognition.classifyPlant(image: plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"), callback: {(suggestedName) -> Void in
+                self.suggestionLabel.isHidden = false
+                self.suggestedNameButton.isHidden = false
+                self.suggestedNameButton.titleLabel?.text = suggestedName
+            })
         } else {
             plantImage.image = #imageLiteral(resourceName: "defaultPlant")
             data = #imageLiteral(resourceName: "defaultPlant").pngData()
@@ -163,31 +168,6 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func classifyImage(_ image: UIImage, localThreshold: Double = 0.0) {
-        
-        let failure = { (error: Error) in
-            DispatchQueue.main.async {
-                print(error)
-            }
-        }
-        
-        watsonRecognition.visualRecognition.classifyWithLocalModel(image: image, classifierIDs: WatsonRecognitionConstants.modelIds, threshold: localThreshold, failure: failure) { classifiedImages in
-            
-            // Make sure that an image was successfully classified.
-            guard let classifiedImage = classifiedImages.images.first else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if(classifiedImage.classifiers[0].classes[0].score! >= 0.85 ) {
-                    self.suggestionLabel.isHidden = false
-                    self.suggestedNameButton.isHidden = false
-                    self.suggestedNameButton.titleLabel?.text = classifiedImage.classifiers[0].classes[0].className
-                }
-            }
-        }
     }
 }
 

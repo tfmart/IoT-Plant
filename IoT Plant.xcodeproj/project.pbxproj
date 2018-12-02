@@ -22,6 +22,8 @@
 		7CC804B221A592CD0082B797 /* WatsonRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC804B121A592CD0082B797 /* WatsonRecognition.swift */; };
 		7CCB009021273A0B0070CE25 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */; };
 		7CCB00942127AF7B0070CE25 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */; };
+		7CCB104321A76ACE006A952B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CCB104221A76ACE006A952B /* Default-568h@2x.png */; };
+		7CCB104521A76E55006A952B /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB104421A76E55006A952B /* PlantModel.swift */; };
 		7CCB6D082199DDA60051458B /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCB6D072199DDA60051458B /* PlantModel.swift */; };
 		7CD5E087215038C000B11A3B /* VisualRecognitionV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E086215038C000B11A3B /* VisualRecognitionV3.framework */; };
 		7CD5E08E215040F200B11A3B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CD5E0892150393700B11A3B /* RestKit.framework */; };
@@ -96,6 +98,8 @@
 		7CC804B121A592CD0082B797 /* WatsonRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonRecognition.swift; sourceTree = "<group>"; };
 		7CCB008F21273A0B0070CE25 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		7CCB104221A76ACE006A952B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7CCB104421A76E55006A952B /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
 		7CCB6D072199DDA60051458B /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
 		7CD2C7492167A83D006A1692 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD2C74B2167A83D006A1692 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8111982159ADE700DF19FB /* Plants Widget.entitlements */,
+				7CCB104421A76E55006A952B /* PlantModel.swift */,
 				7C81119A2159B13F00DF19FB /* defaultPlant.png */,
 				7C8111952159AA1900DF19FB /* Plant.swift */,
 				7C8111862159A31000DF19FB /* TodayViewController.swift */,
@@ -195,6 +200,7 @@
 			children = (
 				7CC804B121A592CD0082B797 /* WatsonRecognition.swift */,
 				7CC804AE21A58E970082B797 /* Extensions.swift */,
+				7C2022C021396E6400E89744 /* GoogleService-Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 		7CEEB46D2124DFFF00886234 = {
 			isa = PBXGroup;
 			children = (
+				7CCB104221A76ACE006A952B /* Default-568h@2x.png */,
 				7CD5E0892150393700B11A3B /* RestKit.framework */,
 				7CD5E08A2150393700B11A3B /* VisualRecognitionV3.framework */,
 				7CEEB4782124DFFF00886234 /* IoT Plant */,
@@ -237,7 +244,6 @@
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
 				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
 				7CEEB4852124E00100886234 /* Info.plist */,
-				7C2022C021396E6400E89744 /* GoogleService-Info.plist */,
 			);
 			path = "IoT Plant";
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				7CEEB4842124E00100886234 /* LaunchScreen.storyboard in Resources */,
 				7C2022C121396E6400E89744 /* GoogleService-Info.plist in Resources */,
 				7CEEB4812124E00100886234 /* Assets.xcassets in Resources */,
+				7CCB104321A76ACE006A952B /* Default-568h@2x.png in Resources */,
 				7CEEB47F2124DFFF00886234 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +424,7 @@
 				7C8111942159A83700DF19FB /* TodayCollectionViewCell.swift in Sources */,
 				7C8111972159AA2300DF19FB /* Plant.swift in Sources */,
 				7C8111872159A31000DF19FB /* TodayViewController.swift in Sources */,
+				7CCB104521A76E55006A952B /* PlantModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

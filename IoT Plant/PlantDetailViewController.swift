@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import FirebaseDatabase
-import FirebaseStorage
 
 class PlantDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -22,20 +20,12 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var humidityTitleLabel: UILabel!
     @IBOutlet weak var updateIndicator: UIActivityIndicatorView!
     
-    //data to fill history tableView
-    var humidityData: [String]?
-    //plant selected on ViewController
+    //Plant selected on ViewController
     var plantFromCell: Plant?
-    
+    //Plant lis
     var recievedList = [Plant]()
-    
-    var imageVar: UIImage!
-    
+    let plantData = PlantModel()
     var plantIndex: Int?
-    //Firebase vars
-    var ref: DatabaseReference?
-    var databaseHandle: DatabaseHandle?
-    var data: Data?
     
    //Action Buttons
     @IBAction func updateButtonPressed(_ sender: Any) {
@@ -43,15 +33,8 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         humidityTitleLabel.alpha = 0
         updateIndicator.alpha = 1
         
-        ref = Database.database().reference()
-        
-        //Get data from Firebase
-        databaseHandle = ref?.child("Plants").child("\((plantFromCell?.name)!)").observe(.childAdded, with: { (snapshot) in
-            let post = snapshot.value as? String
-            
-            if let actualPost = post {
-                self.humidityLabel.text = actualPost
-            }
+        PlantDAO.getLatestHumidity(plantName: (plantFromCell?.name)!, callback: {(humidityValue) -> Void in
+            self.humidityLabel.text = humidityValue
         })
         
         humidityLabel.alpha = 1
@@ -69,10 +52,9 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         //Pressing Add
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            let valueRead: String = textField.text!
-            //Add value read to Firebase
-            self.ref?.child("Plants").child((self.plantFromCell?.name)!).childByAutoId().setValue(valueRead)
-            print("Valor adicionado: \(valueRead)")
+            if let valueRead: String = textField.text {
+                self.plantData.addHumidity(name: (self.plantFromCell?.name)!, humidity: valueRead, plants: self.recievedList)
+            }
         }))
         //Pressing Cancel
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
@@ -119,16 +101,9 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         
         updateIndicator.alpha = 0
         
-        ref = Database.database().reference()
-        
-        //Get data from Firebase
-        databaseHandle = ref?.child("Plants").child("\((plantFromCell?.name)!)").observe(.childAdded, with: { (snapshot) in
-            let post = snapshot.value as? String
-
-            if let actualPost = post {
-                self.humidityLabel.text = actualPost
-            }
-      })
+        PlantDAO.getLatestHumidity(plantName: (plantFromCell?.name)!, callback: {(humidityValue) -> Void in
+            self.humidityLabel.text = humidityValue
+        })
 
         
         nameLabel.text = plantFromCell?.name
@@ -153,8 +128,6 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         // Dispose of any resources that can be recreated.
     }
     
-
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -168,32 +141,20 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
-         let viewController = storyboard?.instantiateViewController(withIdentifier: "list") as! ViewController
         picker.dismiss(animated: true, completion: nil)
         
         if let newImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
             //Updates image locally
+            if let imageData = newImage.pngData() {
+                plantData.updateImage(imageData: imageData, plantName: (plantFromCell?.name)!)
+            } else {
+                //Alert: Could not get image data
+            }
             image.image = newImage
-            print("Size of plantList = \(viewController.plantList.count)")
             recievedList[plantIndex!].image = newImage
-            viewController.plantList = recievedList
-            
-            //Updates image on Firebase Storage
-            let plantImageRef: StorageReference? = Storage.storage().reference()
-            if data == nil {
-                data = newImage.pngData()
-            }
-            
-            plantImageRef?.child("images/\((plantFromCell?.name)!)/image.png").putData(data!, metadata: nil) { (metadata, error) in
-                guard metadata != nil else {
-                    print("Error occurred: \(String(describing: error))")
-                    return
-                }
-            }
+            plantData.savePlants(plants: recievedList)
         }
     }
-
-
 }
 
 // Helper function inserted by Swift 4.2 migrator.

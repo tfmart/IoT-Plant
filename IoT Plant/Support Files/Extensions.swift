@@ -45,6 +45,13 @@ public extension UIView {
             self.alpha = 0.0
         }, completion: nil)
     }
+    
+    func mainScreenStyle() {
+        self.layer.cornerRadius = 20.0
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.masksToBounds = true
+    }
 }
 
 public extension UIImage {
@@ -76,3 +83,11 @@ public extension UIImage {
         
     }
 }
+
+extension ViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+

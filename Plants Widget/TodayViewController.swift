@@ -12,17 +12,15 @@ import NotificationCenter
 class TodayViewController: UIViewController, NCWidgetProviding, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var plantList = [Plant]()
+    var data = PlantModel()
     @IBOutlet weak var todayCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        if let loadedData = UserDefaults().data(forKey: "plantList") {
-            if let loadedPlant = NSKeyedUnarchiver.unarchiveObject(with: loadedData) as? [Plant] {
-                plantList = loadedPlant
-            }
-        } else {
-            print("Nothing has been saved")
+        plantList = data.loadLocalData()
+        if plantList.isEmpty {
+            //Demo data
             plantList = [Plant(name: "Bedroom Roses", humidity: "70.9", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Cactus", humidity: "40.1", image: #imageLiteral(resourceName: "defaultPlant.png")), Plant(name: "Moon Orchid", humidity: "25.2", image: #imageLiteral(resourceName: "defaultPlant.png"))]
         }
         self.todayCollectionView.reloadData()
