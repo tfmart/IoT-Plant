@@ -34,11 +34,16 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
         suggestionLabel.isHidden = true
         suggestedNameButton.titleLabel?.adjustsFontSizeToFitWidth = true
         fadeSuggestedButton.isHidden = true
+        changePhotoButton.isHidden = true
         
         //Style the UIImageView
-        plantImage.layer.cornerRadius = plantImage.frame.height/2
-        plantImage.layer.masksToBounds = false
-        plantImage.clipsToBounds = true
+        
+        plantImage.roundImage()
+        
+//        plantImage.layer.cornerRadius = plantImage.frame.height/2
+//        plantImage.layer.masksToBounds = false
+//        plantImage.clipsToBounds = true
+        
         watsonRecognition.lookForUpdates()
     }
     
@@ -150,7 +155,7 @@ class AddPlantViewController: UIViewController, UIImagePickerControllerDelegate,
             plantImage.image = image
             data = image.pngData()!
             self.addPhotoButton.alpha = 0
-            self.changePhotoButton.alpha = 1
+            self.changePhotoButton.isHidden = false
             //Visual Recognition
             //classifyImage(plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"))
             watsonRecognition.classifyPlant(image: plantImage.image ?? #imageLiteral(resourceName: "defaultPlant"), callback: {(suggestedName) -> Void in

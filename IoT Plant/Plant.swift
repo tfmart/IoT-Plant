@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseDatabase
 
 class Plant: NSObject, NSCoding {
     var name: String

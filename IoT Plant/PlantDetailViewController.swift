@@ -37,10 +37,6 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
             self.humidityLabel.text = humidityValue
         })
         
-        humidityLabel.alpha = 1
-        humidityTitleLabel.alpha = 1
-        updateIndicator.alpha = 0
-        
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
@@ -48,6 +44,7 @@ class PlantDetailViewController: UIViewController, UIImagePickerControllerDelega
         let alert = UIAlertController(title: "Manual Input", message: "Type a humidity value to manually input", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Type here"
+            textField.keyboardType = UIKeyboardType.decimalPad
         }
         //Pressing Add
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak alert] (_) in

@@ -232,8 +232,9 @@
 			isa = PBXGroup;
 			children = (
 				7C8111992159ADF800DF19FB /* IoT Plant.entitlements */,
-				7CEEB4792124DFFF00886234 /* AppDelegate.swift */,
 				7CEEB47D2124DFFF00886234 /* Main.storyboard */,
+				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
+				7CEEB4792124DFFF00886234 /* AppDelegate.swift */,
 				7C276B3A212EFDDD005499AE /* History */,
 				7CCB00932127AF7B0070CE25 /* AddPlantViewController.swift */,
 				7CC804B021A58F1E0082B797 /* Support Files */,
@@ -242,7 +243,6 @@
 				7CCB6D072199DDA60051458B /* PlantModel.swift */,
 				7CEEB4912125C03B00886234 /* Plant List */,
 				7CEEB4802124E00100886234 /* Assets.xcassets */,
-				7CEEB4822124E00100886234 /* LaunchScreen.storyboard */,
 				7CEEB4852124E00100886234 /* Info.plist */,
 			);
 			path = "IoT Plant";

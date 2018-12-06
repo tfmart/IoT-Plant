@@ -52,6 +52,12 @@ public extension UIView {
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.masksToBounds = true
     }
+    
+    func roundImage() {
+        self.layer.masksToBounds = false
+        self.layer.cornerRadius = self.frame.height/2
+        self.clipsToBounds = true
+    }
 }
 
 public extension UIImage {

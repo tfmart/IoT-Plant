@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import FirebaseDatabase
 
 
 class HistoryTableViewController: UITableViewController {
 
     var humidityList: [String] = []
-    var historyReference: DatabaseReference?
-    var humidityHandle: DatabaseHandle?
-    
     var pullToRefresh = UIRefreshControl()
+    var plantData: PlantModel?
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -26,17 +23,12 @@ class HistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Get humidity from Firebase
-        historyReference = Database.database().reference()
-        humidityHandle = historyReference?.child("Plants").child(plantName!).observe(.childAdded, with: { (snapshot) in
-            let post = snapshot.value as? String
-            if let actualPost = post {
-                if (actualPost != "--.-") {
-                    self.humidityList.append(actualPost)
-                    self.tableView.reloadData()
-                }
-            }
+        //Get humidity from Firebasexw
+        PlantDAO.getHumidityHisotry(plantName: plantName ?? "", callback: {(history) -> Void in
+            self.humidityList = history
+            self.tableView.reloadData()
         })
+        
         
         //Handles Pull to Refresh
         pullToRefresh.addTarget(self, action: #selector(HistoryTableViewController.refresh), for: UIControl.Event.valueChanged)
@@ -53,15 +45,9 @@ class HistoryTableViewController: UITableViewController {
         humidityList.removeAll()
         self.tableView.reloadData()
         //Gets data from Firebase
-        historyReference = Database.database().reference()
-        humidityHandle = historyReference?.child("Plants").child(plantName!).observe(.childAdded, with: { (snapshot) in
-            let post = snapshot.value as? String
-            if let actualPost = post {
-                if (actualPost != "--.-") {
-                    self.humidityList.append(actualPost)
-                    self.tableView.reloadData()
-                }
-            }
+        PlantDAO.getHumidityHisotry(plantName: plantName ?? "", callback: {(history) -> Void in
+            self.humidityList = history
+            self.tableView.reloadData()
         })
         
         self.pullToRefresh.endRefreshing()
