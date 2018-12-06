@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Plant: NSObject, NSCoding {
     var name: String
