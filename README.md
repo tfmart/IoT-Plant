@@ -19,6 +19,6 @@ Back to the plant list screen, if the user taps the '+' button, he can register 
 - [x] CoreML Model to identify plants
 - [x] Store plants on Firebase
 - [x] 3D Touch Shortcuts
-- [ ] iOS Widget to display plants'info
+- [ ] iOS Widget to display plants' info
 - [ ] SiriKit Integration to get a plant's humidity by voice
 - [ ] watchOS companion app
