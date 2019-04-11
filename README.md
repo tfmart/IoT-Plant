@@ -2,7 +2,7 @@
 
 This application let users register their plants to check their humidity, so he can check whenever they need to be watered. The data can either be read from a device, such as a Arduino with a humidty sensor, or can be input manually inside the app.
 
-![Plant List](https://d3r69eeiwn2k86.cloudfront.net/items/3U1T233i0R401V2D183F/iotplant.png)
+![Plant List](https://d3r69eeiwn2k86.cloudfront.net/items/403a1B3s0L0S3p2k3S1P/plant1.png)
 
 Currently, the app get it's data from a Firebase Realtime Database, in which it displays the plants and their latest humidity value. 
 
