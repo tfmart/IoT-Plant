@@ -22,3 +22,10 @@ Back to the plant list screen, if the user taps the '+' button, he can register 
 - [ ] iOS Widget to display plants' info
 - [ ] SiriKit Integration to get a plant's humidity by voice
 - [ ] watchOS companion app
+
+## Libraries
+
+This app uses the following frameworks:
+
+- [Firebase iOS SDK](https://github.com/firebase/firebase-ios-sdk)
+- [Watson Visual Recognition](https://github.com/watson-developer-cloud/visual-recognition-coreml)
